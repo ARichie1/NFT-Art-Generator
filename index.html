@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nft Art Generator</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/left.css">
+    <link rel="stylesheet" href="./assets/css/middle.css">
+    <link rel="stylesheet" href="./assets/css/nft_art_generator.css">
+    <link rel="stylesheet" href="./assets/css/right.css">
+    <link rel="stylesheet" href="./assets/css/custom.css">
+    <link rel="stylesheet" href="./assets/css/components.css">
+    <link rel="stylesheet" href="./assets/vendor/fontawesome-free-6.4.0-web/css/all.css">
+</head>
+</head>
+<body>
+<!-- =====APP STARTS HERE===== -->
+    <div class="app">
+<!-- =====APP LEFT SECTION STARTS HERE===== -->
+        <section class="left">
+            <div class="minimize_space clkb_link component l_c">
+                <span class="mini_btn"><i class="fa fa-angle-double-left"></i></span>
+                <span class="maxi_btn"><i class='fa fa-angle-double-right'></i></span>
+            </div>
+            <header class="component l_c">
+                <span class="link_icon"><i class="fa fa-bolt"></i></span> 
+                <h1 class="brand_name link_text">Quick Generator</h1>
+            </header>
+            <nav class="main_nav component l_c">
+                <ul>
+                    <li class="home main_link clkb_link screen_link ltc">
+                        <span class="link_icon">
+                            <i class="fa fa-home"></i>
+                        </span>
+                        <span class="link_text">Home</span>
+                    </li>
+                    <li class="genrator_link main_link clkb_link ltc">
+                        <span class="link_icon">
+                            <i class="fa fa-gears"></i>
+                        </span>
+                        <span class="link_text">Generator</span>
+                    </li>
+                    <li class="explore main_link clkb_link ltc">
+                        <span class="link_icon">
+                            <i class="fa fa-map"></i>
+                        </span>
+                        <span class="link_text">
+                            Explore
+                        </span>
+                    </li>
+                    <li class="settings main_link clkb_link">
+                        <span class="link_icon">
+                            <i class="fa fa-moon dark_mode_icon"></i>
+                            <i class="fa fa-sun day_mode_icon"></i>
+                        </span>
+                        
+                        <span class="link_text">
+                            <p class="dark_mode_text">Dark Mode</p>
+                            <p class="day_mode_text">Day Mode</p>
+                        </span>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+<!-- =====APP LEFT SECTION ENDS HERE===== -->
+
+<!-- =====APP MIDLLE SECTION STARTS HERE===== -->
+        <section class="middle">
+            <span id="vanish_point" style="display: none;"></span>
+            
+            <ul class="right_tools_in_media_query">
+                <li class="clkb_btn"><i class="fa fa-desktop"></i></li>
+            </ul>
+
+            <!-- NOTIFIACATION BOX STARTS HERE -->
+            <div class="notification_screen">
+                <div class="notification_props">
+                    <div class="notification_header">
+                        <div class="notification_type"></div>
+                    </div>
+                    <div class="notification_info"></div>
+                </div>
+            </div>
+            <!-- NOTIFIACATION BOX ENDS HERE -->
+
+            <!-- SEARCH STARTS HERE -->
+            <div class="searchbar component">
+                <ul class="search_small_screen_overlay">
+                    <li class="left_opener clkb_link"><i class="fa fa-bars"></i></li>
+                    <li class="app_name clkb_link">
+                        <span><i class="fa fa-bolt"></i></span>
+                        <span>Sharply</span>
+                    </li>
+                    <li class="search_opener clkb_link"><i class="fa fa-search"></i></li>    
+                </ul>
+                <form action="" method="post">
+                    <div class="form_cancel clkb_link"><i class="fa fa-times"></i></div>
+                    <input type="search" name="search" id="search" placeholder="Search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+            <!-- SEARCH ENDS HERE -->
+
+            <!-- LANDING PAGE STARTS HERE -->
+            <div class="landing_page">
+                <h3>WELCOME YOU</h3>
+                <h3>Start Creating Collection</h3>
+                <button>Start Now</button>
+            </div>
+            <!-- LANDING PAGE ENDS HERE -->
+
+            <!-- NFT GENERATOR STARTS HERE -->
+            <div class="nft_art_generator component m_c" state="closed">
+                <div class="component_opener">
+                    <span><i class="fa fa-images"></i></span>
+                    <span class="component_header"><h4>NFT Art Generator</h4></span>
+                    <span class="remove_component close" id="##nft_art_generator"><i class="fa fa-power-off"></i></span>
+                </div>
+                <div class="create_nft_collection" state="opened">
+                    
+                    <form action="" method="post" aria-disabled="true">
+                        <h3>Create NFT Collection</h3>
+                        
+                        <label for="collection_name">Collection Name</label>
+                        <input type="text" name="collection_name" id="collection_name" placeholder="e.g Maxi Infinity">
+                        <label for="collection_description">Collection Description</label>
+                        <textarea maxlength="200" wrap="hard" type="text" class="scr scr-y"
+                            name="collection_description" id="collection_description">
+                        </textarea>
+                        <label for="collection_size">Collection Size</label>
+                        <input type="text" maxlength="5" name="collection_size" id="collection_size" placeholder="100">
+                        <ul class="collection_dimension">
+                            <li>
+                                <label for="output_width">Output Width</label>
+                                <input type="text" maxlength="4" name="output_width" id="output_width" placeholder="e.g 500">
+                            </li>
+                            <li>
+                                <label for="output_height">Output Height</label>
+                                <input type="text" maxlength="4" name="output_height" id="output_height" placeholder="e.g 500">
+                            </li>
+                        </ul>
+                        
+                        <label for="output_format">Output Format</label>
+                        <select type="" name="output_format" id="output_format">
+                            <option value="png">png</option>
+                            <option value="jpg">jpg</option>
+                            <option value="jpeg">jpeg</option>
+                            <option value="webp">webp</option>
+                        </select>
+
+                        <button type="submit">Next</button>
+                    </form>
+                </div>
+                <div class="user_layers" state="closed">
+                    <div class="on_no_layers" state="opened">
+                        <p>YOU DON'T HAVE ANY LAYER</p>
+                        <div class="import_create">
+                            <div class="start_import_layer clkb_link">
+                                <span class="many_icons"><i class="fa fa-layer-group"></i></span>
+                                    Import Layers
+                            </div> 
+                            <div class="start_create_layer clkb_link">
+                                <span class="many_icons"><i class="fa fa-layer-group"></i></span>
+                                Create Layer
+                            </div>  
+                        </div>
+                    </div>
+
+                    <div class="art_generator_crud_tools" state="closed">
+                        <div class="art_generator_tools_opener clkb_link">
+                            <span class="many_icons"><i class="fa fa-layer-group"></i></span>
+                            Merge
+                        </div>
+                        <div class="create_layer clkb_btn">
+                            <span class="many_icons"><i class="fa fa-layer-group"></i></span>
+                            Create Layer
+                        </div>       
+                        <div class="layers_cnt_container"><span class="layers_cnt"></span></div>
+                        <div class="select_layer clkb_link">
+                            <span class="many_icons"><i class="fa fa-layer-group"></i></span>
+                            Select
+                        </div>
+                    </div>
+
+                    <div class="art_generator_tools">
+                        <div class="import_layer clkb_link" id="#on_import">
+                            <span class="many_icons"><i class="fa fa-layer-group"></i></span>
+                                Import Layers
+                        </div>
+                        <div class="export_layer clkb_link" id="#on_export">
+                            <span class="many_icons"><i class="fa fa-layer-group"></i></span>
+                                Export Layers
+                        </div>
+                        <div class="generate_art clkb_link" id="#on_generate">
+                            <span class="many_icons"><i class="fa fa-images"></i></span>
+                                Generate Art
+                        </div>
+                    </div>
+                    
+                    <div class="on_create" id="box_mode" state="closed">
+                        <div class="on_create_inner">
+                            <ul class="on_create_header">
+                                <li class="on_create_close clkb_link close" id="##on_create">
+                                    <i class="fa fa-times"></i>
+                                </li>
+                                <li>Create Layer</li>
+                            </ul>
+                            <form action="" method="">
+                                <input type="text" name="create_new_layer" class="on_create_input" id="on_create_input" placeholder="Layer Name">
+                                <button class="clkb_btn">Add Layer</i></button>
+                            </form>
+                        </div>            
+                    </div>
+
+                    <div class="on_select" state="closed">
+                        <div class="cancel_on_select clkb_link close" id="##on_select">
+                            <i class="fa fa-times"></i>
+                        </div> 
+                        <div class="select_all clkb_link">Select All</div>        
+                        <div class="unselect_all clkb_link">Unselect All</div>        
+                        <div class="seleted_layers">Selected : <span class="selected_cnt">0</span></div>        
+                        <div class="del_layers clkb_link"><i class="fa fa-trash-alt"></i></div>    
+                    </div> 
+                    
+                    <div class="on_import on_pop_up" state="closed">
+                        <div class="on_import_inner on_pop_up_inner">
+                            <ul class="on_import_header">
+                                <li class="on_import_close clkb_link close" id="##on_import">
+                                    <i class="fa fa-times"></i>
+                                </li>
+                                <li>Import Layers</li>
+                            </ul>
+                            <form action="" method="">
+                                <textarea type="text" name="import_json_layers" 
+                                    class="on_import_input scr scr-y" id="on_import_input">
+                                </textarea>
+                                <button type="submit" class="clkb_btn">Add Layers</i></button>
+                            </form>
+                        </div> 
+                    </div>
+
+                    <div class="on_generate on_pop_up">
+                        <div class="on_generate_inner on_pop_up_inner">
+                            <ul class="on_generate_header">
+                                <li class="on_generate_close clkb_link close" id="##on_generate">
+                                    <i class="fa fa-times"></i>
+                                </li>
+                                <li>Generate Art</li>
+                            </ul>
+                            <ul class="on_generate_options">
+                                <li class="clkb_btn">Test a Combination</li>
+                                <li class="clkb_btn">Generate Collection [ <span class="coll_size">100</span> ]</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="build_test_mode_indicator" state="closed">
+                        <li class="cancel_build_test clkb_link">
+                            <i class="fa fa-times"></i></li>
+                        <li>Test Mode</li>
+                        <li>Selected : &nbsp; <span class="selected_test_image_cnt">0</span></em></li>
+                    </ul>
+                    <div class="build_test clkb_btn" state="closed"><i class="fa fa-check"></i></div>
+                    
+                    <div class="layers scr scr-y" select_mode="relative" state=""closed></div>
+                    <div class="user_single_layer" state="closed"></div>
+                </div>
+            </div>
+            <!-- NFT GENERATOR ENDS HERE -->
+        </section>
+<!-- =====APP MIDLLE SECTION ENDS HERE===== -->
+
+<!-- =====APP RIGHT SECTION STARTS HERE===== -->
+        <section class="right">
+            <div class="free_frame component r_c h_c" state="opened">
+                <!-- <img src="./assets/images/trust.jpg" alt=""> -->
+            </div>
+            <div class="generator_preview component r_c h_c" state="closed">
+                <div class="component_opener">
+                    <span><i class="fa fa-tv"></i></span>
+                    <span class="component_header">
+                        <ul class="generator_preview_frames">
+                            <li class="view_generated_test_art clkb_link">Preview</li>
+                            <li class="view_generated_test_art clkb_link">Test Art</li>
+                            <li class="view_generated_collection clkb_link">Collection</li>
+                        </ul>
+                    </span>
+                    <span class="remove_component close" id="##generator_preview"><i class="fa  fa-times"></i></span>
+                </div>
+                <div class="layer_image_preview_frame gen_preview">
+                    <canvas id="layer_image_canvas"></canvas>
+                    <ul class="layer_image_info">
+                        <li class="image_own_layer"></li>
+                        <li class="layer_image_id"></li>
+                        <li class="layer_image_name"></li>
+                        <li class="layer_image_dimension"></li>
+                    </ul>
+                </div>
+                <div class="test_art_preview_frame gen_preview">
+                    <canvas id="test_art_canvas"></canvas>
+                    <ul class="test_art_downloader">
+                        <li class="test_art_dimension"></li>
+                        <li class="test_art_name"></li>
+                        <li class="test_art_download_btn clkb_btn">Download</li>
+                    </ul>
+                </div>
+                <div class="collection_preview_frame gen_preview">
+                    <canvas id="collection_image_generator_canvas"></canvas>
+                    <div class="collection_frame_image_cover">
+                        <img src="" alt="">
+                    </div>
+                    <ul class="src scr-y" id="generated_arts"></ul>
+                    <div class="collection_download_btn clkb_btn">
+                        <i class="fa fa-arrow-down"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+<!-- =====APP RIGHT SECTION ENDS HERE===== -->
+    </div>
+<!-- =====APP ENDS HERE===== -->
+    <script type="module" src="./assets/js/app.js"></script>
+    <script type="module" src="./assets/js/design.js"></script>
+    <script defer src="./assets/vendor/fontawesome-free-6.4.0-web/js/all.js"></script>
+</body>
+</html>
