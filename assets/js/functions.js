@@ -468,14 +468,14 @@ this.reset_sliders = (default_values, sliders) => {
             });
             notification_info_container.appendChild(new_div)
         }
-        this.appear(element);
+        this.appear(element, "9");
         let n_close_btns = element.querySelectorAll(".notification_close")
         n_close_btns.forEach(ncbs => {
             ncbs.addEventListener("click", () => {
                 element.querySelector(".notification_type").innerHTML = "";
                 element.querySelector(".notification_info").innerHTML = "";
-                this.disappear(element)
-                this.appear(bg_element)
+                this.disappear(element, "-9")
+                this.appear(bg_element, "5")
             })
         });
 

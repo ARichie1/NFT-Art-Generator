@@ -36,11 +36,29 @@
                         </span>
                         <span class="link_text">Home</span>
                     </li>
-                    <li class="genrator_link main_link clkb_link ltc">
+                    <li class="generator_link main_link clkb_link ltc">
                         <span class="link_icon">
                             <i class="fa fa-gears"></i>
                         </span>
                         <span class="link_text">Generator</span>
+                    </li>
+                    <li class="generator_setting_up main_link clkb_link ltc" id="generator_setting_up">
+                        <span class="link_icon">
+                            <i class="fa fa-clipboard-list"></i>
+                        </span>
+                        <span class="link_text">Setting Up</span>
+                    </li>
+                    <li class="generator_power_off_link main_link clkb_link ltc" id="generator_power_off_link">
+                        <span class="link_icon">
+                            <i class="fa fa-power-off"></i>
+                        </span>
+                        <span class="link_text">Power Off</span>
+                    </li>
+                    <li class="searcher_link main_link clkb_link ltc" id="searcher_link">
+                        <span class="link_icon">
+                            <i class="fa fa-search"></i>
+                        </span>
+                        <span class="link_text">Search Layer</span>
                     </li>
                     <li class="explore main_link clkb_link ltc">
                         <span class="link_icon">
@@ -91,7 +109,7 @@
                     <li class="left_opener clkb_link"><i class="fa fa-bars"></i></li>
                     <li class="app_name clkb_link">
                         <span><i class="fa fa-bolt"></i></span>
-                        <span>Sharply</span>
+                        <span>Quick Generator</span>
                     </li>
                     <li class="search_opener clkb_link"><i class="fa fa-search"></i></li>    
                 </ul>
@@ -104,10 +122,10 @@
             <!-- SEARCH ENDS HERE -->
 
             <!-- LANDING PAGE STARTS HERE -->
-            <div class="landing_page">
+            <div class="landing_page component m_c h_c">
                 <h3>WELCOME YOU</h3>
                 <h3>Start Creating Collection</h3>
-                <button>Start Now</button>
+                <button class="clkb_btn to_nft_gen">Start Now</button>
             </div>
             <!-- LANDING PAGE ENDS HERE -->
 
@@ -116,7 +134,7 @@
                 <div class="component_opener">
                     <span><i class="fa fa-images"></i></span>
                     <span class="component_header"><h4>NFT Art Generator</h4></span>
-                    <span class="remove_component close" id="##nft_art_generator"><i class="fa fa-power-off"></i></span>
+                    <span class="remove_component close clkb_link" id="##nft_art_generator"><i class="fa fa-power-off"></i></span>
                 </div>
                 <div class="create_nft_collection" state="opened">
                     
@@ -150,7 +168,7 @@
                             <option value="webp">webp</option>
                         </select>
 
-                        <button type="submit">Next</button>
+                        <button type="submit" class="clkb_btn">Next</button>
                     </form>
                 </div>
                 <div class="user_layers" state="closed">

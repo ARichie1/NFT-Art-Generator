@@ -38,6 +38,10 @@ const maxi_space_btn = document.querySelector(".minimize_space .maxi_btn")
 const main_nav = document.querySelector(".main_nav")
 const main_links = document.querySelectorAll(".main_link")
 const nft_art_generator_link = document.querySelector(".generator_link")
+const nft_art_generator_setting_up = document.querySelector("#generator_setting_up")
+const nft_art_generator_power_off_link = document.querySelector("#generator_power_off_link")
+
+const searcher_link= document.querySelector(".searcher_link")
 
 const link_icons = document.querySelectorAll(".link_icon")
 const link_texts = document.querySelectorAll(".link_text")
@@ -47,6 +51,11 @@ const link_texts = document.querySelectorAll(".link_text")
 const middle_components = document.querySelectorAll(".m_c");
 const middle_components_links = document.querySelectorAll(".m_c_l");
 const middle_close_component_links = document.querySelectorAll(".middle .close")
+
+
+// Landing Page Elements Starts Here
+const landing_page = document.querySelector(".landing_page")
+const landing_page_btn = document.querySelector(".landing_page button")
 
 // Searchbar Elements Starts Here
 const searchbar = document.querySelector(".searchbar")
@@ -63,6 +72,7 @@ const search_opener = document.querySelector(".searchbar .search_small_screen_ov
 
 //  NFT Art Generator Elements Starts Here
 const nft_art_generator = document.querySelector(".nft_art_generator")
+const nft_art_generator_component_opener = document.querySelector(".nft_art_generator .component_opener")
 const nft_art_generator_close = document.querySelector(".nft_art_generator .component_opener .close")
 
 // Create NFT Collection Component Elements Starts Here
@@ -192,6 +202,19 @@ minimize_space.addEventListener('click', () => {
     helper.toggle_one_style_for_many(link_icons, "width", "100%", "25%")
 })
 
+// TOGGLE SEARCH ON BIG SCREENS
+searcher_link.addEventListener("click", () => {
+    helper.toggle_style_many([
+        {name: searchbar, props: [
+                ["opacity", "1", "0"],
+                ["z-index", "7", "-7"]]},
+        {name: nft_art_generator_component_opener,
+            props: [
+                ["opacity", "0", "1"],
+                ["z-index", "-5", "5"]]}
+    ])
+})
+
 if (WINDOW_WIDTH <= SMALL_SCREEN) {
     // Search Elements Functionalities
     search_opener.addEventListener("click", () => {
@@ -231,6 +254,17 @@ if (WINDOW_WIDTH <= SMALL_SCREEN) {
 // ================================================ //
 
 // =====MIDDLE SIDE STARTS HERE=====//
+
+helper.many_actions("click", [landing_page_btn, nft_art_generator_link], () => {
+    helper.hide(nft_art_generator_link)
+    helper.unhide(nft_art_generator_setting_up, "flex")
+    helper.hide_many([nft_art_generator_link, nft_art_generator_power_off_link])
+
+    helper.elements_state_swap("landing_page", "closed")
+    helper.elements_state_swap("nft_art_generator", "opened")
+
+    if (WINDOW_WIDTH <= 900) helper.disappear(nft_art_generator_component_opener)
+})
 // =====Toggle middle to left starts here===== //
 right_tools_in_media_query_openers[0].onclick = () => {
     helper.toggle_style_many([
@@ -257,6 +291,10 @@ create_nft_collection_button.addEventListener('click', (e) => {
     collection_height = parseInt(collection_height_input.value)
     collection_format = collection_output_format_input.value
     
+    // app left tools to show/hide
+    helper.unhide(nft_art_generator_power_off_link, "flex")
+    helper.hide_many([nft_art_generator_setting_up, nft_art_generator_link])
+     
     // app middle tools to show/hide
     helper.hide(create_nft_collection)
     helper.unhide(user_layers, "block")
@@ -500,6 +538,8 @@ let layers_counter = (() => {
         user_layers_current_component = "on_no_layers"
         switch_user_layers_component()
         on_create_container.id = "box_mode"
+    }else{
+        helper.unhide(searcher_link, "flex")
     }
 });
 
@@ -867,8 +907,16 @@ let shutdown_nft_art_generator = () => {
         user_layers, nft_art_generator_close])
     helper.unhide_many([create_nft_collection,
         free_frame_container], "flex")
+
+    helper.unhide(nft_art_generator_link, "flex")
+    helper.hide_many([nft_art_generator_setting_up, nft_art_generator_power_off_link])
+
+    helper.elements_state_swap("nft_art_generator", "closed")
+    helper.elements_state_swap("landing_page", "opened")
 }
-nft_art_generator_close.addEventListener("click", () => {
+
+helper.many_actions("click", 
+[nft_art_generator_power_off_link, nft_art_generator_close], () => {
     let msg = `You are about poweroff the art generator <br>
     <p> !!ALL LAYERS AND THE COLLECTION ITSELF WILL BE DELETED !!</p>`
     let btns = [

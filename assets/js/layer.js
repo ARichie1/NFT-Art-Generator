@@ -171,8 +171,8 @@ let append_layer = ((new_layer, mode) => {
                 </span>
                 <span class="l_options">
                     <p class="l_rename clkb_link">Rename</p>
-                    <span class="l_add_image clkb_link many_icons" >
-                        <i class="fa fa-images"></i>
+                    <span class="l_add_image clkb_link" >
+                        <i class="fa fa-plus"></i>
                         <input type="file" name="l_image_uploader" class="l_image_uploader"  multiple>
                     </span>
                     <span class="l_delete clkb_link">

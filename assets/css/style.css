@@ -1,40 +1,28 @@
 :root{
     /* MAIN BACKGROUND */
-    --bg : #2b2a2a;
-    --bg: linear-gradient(180deg, #2af598 0%, #009efd 100%);
-    --lbg : #464545;
-    /* --background_color : #f0e9e9; */
-    /* ELEMENT BACKGROUND */
-    --ebg: rgba(255, 255, 2555, 0.129);
     /* GLASS BACKGROUND */
-    --glass : linear-gradient(
-        to right bottom,
-        rgba(255, 255, 255, 0.4),
-        rgba(255, 255, 255, 0.1)
-    );
+    --ebg: rgba(255, 255, 2555, 0.129);
     --blur :  blur(30px);
+
     /* THEME COLOR */
-    --tc : rgb(75, 145, 56) ;
-    /* --tc : rgb(206, 141, 56); */
-    /* THEME COLOR LIGHT TONE */
-    --tcl : rgb(157, 218, 141) ;
-    /* THEME COLOR DEEP TONE */
-    --tcd : rgb(45, 92, 32) ;
-    /* FONT COLOR WHITE*/
-    --fcw : #f8f8f8 ;
-    /* FONT COLOR BLACK */
-    --fcb : #000;
-    /* FONT COLOR PREMIUM */
-    --fcp : gold;
+    --tc1 : rgb(108, 169, 238) ;
+    --tc2 : rgb(239, 117, 206) ;
+    --tc3 : rgb(132, 81, 181) ;
+    /* PLACEHOLDER COLOR LIGHT TONE */
+    --tphc : saddlebrown;
+    /* CHILD ICON COLOR */
+    --tcic : gold;
+
     /* FONT SIZE */
     --fsl : 16px; --fsm : 13px; --fss : 12px;
     --fsxl : 18px; --fsxs : 8px;
+
     /* SHADOW */
     --shadow : 0 0 0.5em #000a inset;
     --shadow_out : 0 0 0.5em rgba(248, 247, 247, 0.667);
+
     /* BORDER */
-    --line : 1px solid #000;
-    --line_t : 1px solid var(--tc);
+    --line : 1px solid var(--tc1);
 
 }
 
@@ -46,7 +34,12 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;width:100vw;
-    background: var(--bg);
+    /* background: var(--bg); */
+    background: url(../images/bg_box.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(1px);
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     /* font-family: FontAwesome; */
     overflow: hidden;
@@ -63,7 +56,7 @@ li, span, .fa{list-style: none; cursor: pointer;}
     width: 100%;height: 100%;
     display: flex;
     box-shadow: var(--shadow);
-    color: var(--tc);
+    color: var(--tc1);
     font-size: 80%;
     overflow: hidden;
 }
@@ -87,7 +80,6 @@ li, span, .fa{list-style: none; cursor: pointer;}
 }
 .app .right{
     width: 40%; z-index: 5;
-    border: 1px solid green;
     overflow: hidden;
 }
 
@@ -100,7 +92,6 @@ li, span, .fa{list-style: none; cursor: pointer;}
     align-items: center;
     justify-content: space-around;
     border-bottom: var(--line);
-
 }
 .app .component_opener span{
     flex-basis: 5%;
@@ -136,7 +127,8 @@ li, span, .fa{list-style: none; cursor: pointer;}
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        background: var(--lbg);
+        background: var(--tc3);
+        padding-top: 4%;
     }
     .minimize_space{display: none !important;}
     .app .left header{height: 5% !important; 
@@ -155,8 +147,9 @@ li, span, .fa{list-style: none; cursor: pointer;}
     /* Search MQ Styles */
     .app .middle{left: 0%; width: 100%;}
     .app .middle .searchbar{
-        position: relative;
-        height: 5% !important;}
+        opacity: 1 !important; z-index: 5 !important;
+        height: 5% !important;
+    }
     .app .middle .searchbar form{display: none;}
     .app .middle .searchbar form .form_cancel{
         display: flex; justify-content: center; 

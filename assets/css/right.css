@@ -126,7 +126,7 @@
 .app .right .generator_preview
 .collection_preview_frame 
 #generated_arts::-webkit-scrollbar-thumb{
-    background: var(--tc);
+    background: var(--tc1);
     border-radius: 5px;
 }
 .app .right .generator_preview
