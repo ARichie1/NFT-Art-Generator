@@ -483,5 +483,25 @@ this.reset_sliders = (default_values, sliders) => {
     })
 // =====NOTIFICATION_BOX FUNCTIONS ENDS HERE=====//
 
+    this.copy_content = async (text) => {
+        try {
+            await navigator.clipboard.writeText(text);
+            console.log('Content copied to clipboard');
+            console.log(text);
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+    }
+    this.paste_content = async (destination) => {
+        try {
+            let clip_text = await navigator.clipboard.readText();
+            console.log('Content copied to clipboard');
+            console.log(clip_text);
+            destination.innerHTML = clip_text
+            console.log(destination);
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+    }
 }
 // =====CLASS (Help_me) ENDS HERE===== //

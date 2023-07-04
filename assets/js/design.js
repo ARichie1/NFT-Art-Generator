@@ -119,6 +119,13 @@ const on_select_delete_btn = document.querySelector(".del_layers")
 const import_layer_link  = document.querySelector(".import_layer")
 const on_import_container = document.querySelector(".on_import")
 const on_import_close = document.querySelector(".on_import .close")
+const on_import_instruction = document.querySelector(".on_import .import_instruction")
+const on_import_copy_btn = document.querySelector(".on_import .import_instruction .copy_btn")
+const on_import_code_box = document.querySelector(".on_import .import_instruction .code_box")
+const on_import_continue_btn = document.querySelector(".on_import .import_instruction .continue_to_import")
+const on_import_options = document.querySelector(".on_import .on_import_form_options")
+const on_import_view_format_btn = document.querySelector(".on_import .view_import_format")
+const on_import_paste_btn = document.querySelector(".on_import .paste_btn")
 const on_import_input  = document.querySelector(".on_import_input")
 const on_import_button  = document.querySelector(".on_import button")
 const export_layer_link  = document.querySelector(".export_layer")
@@ -241,7 +248,7 @@ if (WINDOW_WIDTH <= SMALL_SCREEN) {
 
     // Elements That Closes Left Menu
     helper.many_actions("click", 
-    [app_right, nft_art_generator, search_opener], 
+    [app_right, main_links, landing_page, nft_art_generator, search_opener], 
     () => {
         helper.style_many_for_one(app_left, [
             ["left", "-70%"],
@@ -349,10 +356,10 @@ let fetch_and_activate_dom_layers = (() => {
         
         let l_options = layer_properties.querySelector(".l_options")  
         layers_options.push(l_options);
-        let l_rename_btn = layer_properties.querySelector(".l_options .l_rename")
-        let l_add_image_btn = layer_properties.querySelector(".l_options .l_add_image")
+        const l_rename_btn = layer_properties.querySelector(".l_options .l_rename")
+        const l_add_image_btn = layer_properties.querySelector(".l_options .l_add_image")
         let l_image_uploader = layer_properties.querySelector(".l_options .l_add_image .l_image_uploader")
-        let l_delete_btn = layer_properties.querySelector(".l_options .l_delete")
+        const l_delete_btn = layer_properties.querySelector(".l_options .l_delete")
         let l_check_box = layer_properties.querySelector(".check_box")
         layers_check_boxes.push(l_check_box)
         let l_properties_hider = layer_properties.querySelector(".layer_properties_hider")
@@ -665,6 +672,28 @@ import_layer_link.addEventListener("click", () => {
     art_generator_tools_container.style.left = "-40%"
 })
 
+// Control Import Copy/Paste
+on_import_copy_btn.addEventListener("click", () => {
+    console.log("copied");
+    let text = on_import_code_box.innerText;
+    helper.copy_content(text)
+})
+on_import_paste_btn.addEventListener("click", () => {
+    console.log("pasted");
+    helper.paste_content(on_import_input)
+})
+
+helper.many_actions("click", 
+    [on_import_copy_btn, on_import_continue_btn], () => {
+    helper.disappear(on_import_instruction)
+    helper.unhide(on_import_options, "flex")
+})
+
+on_import_view_format_btn.addEventListener("click", () => {
+    helper.appear(on_import_instruction)
+    helper.hide(on_import_options)
+})
+
 // import the layers in the import conponent text area
 on_import_button.addEventListener("click", (e) => {
     e.preventDefault()
@@ -686,7 +715,12 @@ on_import_button.addEventListener("click", (e) => {
     on_import_input.value = ""
 })
 on_import_close.addEventListener("click", () => {
-    close_user_layers_component("block")
+    if (on_create_container.id == "box_mode") {
+        close_user_layers_component("block")
+    }else {
+        close_user_layers_component("flex")
+        layers_container.style.display = "block"
+    }
 })
 // Import Layers Ends Here
 
@@ -721,7 +755,9 @@ on_create_button.addEventListener("click", (e) => {
     on_create_container.id = "quick_mode"
 })
 on_create_close.addEventListener("click", () => {
-    close_user_layers_component("block")
+    if (on_create_container.id == "box_mode") {
+        close_user_layers_component("block")
+    }else close_user_layers_component("flex")
 })
 // Create New Layers Ends Here 
 
@@ -745,6 +781,7 @@ generate_art_link.addEventListener('click', () => {
 })
 on_generate_close.addEventListener('click', () => {
     close_user_layers_component("flex")
+    layers_container.style.display = "block"
 })
 
 // Generate a Test Art

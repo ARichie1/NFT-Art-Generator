@@ -236,10 +236,11 @@ let add_image_options = (
     }
 
     if (layer_images_containers.length > 0) {
-        console.log("yes");
         layer_images_containers.forEach(lic => {
             give_image_options(lic)
         })
+        let l_add_image_btn = document.querySelector(`#layer_${layer_object.id} .l_add_image`)
+        l_add_image_btn.classList.add("re_position_btn")
     }
 }
 // LAYER IMAGES FUNCTIONALITY ENDS HERE

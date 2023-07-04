@@ -165,28 +165,28 @@ let append_layer = ((new_layer, mode) => {
     let new_layer_properties = 
             `<div class="l_properties">
                 ${has_closer}
-                <span class="l_name_container">
+                <div class="l_name_container">
                     ${has_layer_icon}
                     <h4 class="l_name clkb_link">${new_layer.name}</h4>
-                </span>
-                <span class="l_options">
+                </div>
+                <div class="l_options">
                     <p class="l_rename clkb_link">Rename</p>
-                    <span class="l_add_image clkb_link" >
-                        <i class="fa fa-plus"></i>
+                    <div class="l_add_image clkb_link" >
+                        <span><i class="fa fa-plus"></i></span>
                         <input type="file" name="l_image_uploader" class="l_image_uploader"  multiple>
-                    </span>
-                    <span class="l_delete clkb_link">
+                    </div>
+                    <div class="l_delete clkb_link">
                         <i class="fa fa-trash-alt"></i>
                         <input type="hidden" name="l_deleter" class="l_deleter">
-                    </span>
-                </span>
+                    </div>
+                </div>
                 ${has_check_box} 
 
-                <span class="l_on_rename">
+                <div class="l_on_rename">
                     <span class="clkb_link close" id="##l_on_rename"><i class="fa fa-times"></i></span>
                     <input type="text" name="" class="l_rename_input" placeholder="Enter new name">
                     <button class="l_change_name clkb_btn">Change</button>
-                </span>
+                </div>
                 ${has_props_hider}
             </div>`
 
@@ -206,7 +206,7 @@ let append_layer = ((new_layer, mode) => {
 let image_loader = ((new_layer) => {
     let new_image_options = 
     `<ul class="image_options">
-        <li class="clkb_link"><i class="fa fa-edit"></i></li>
+        <li class="clkb_link"><i class="fa fa-eye"></i></li>
         <li class="clkb_link"><i class="fa fa-trash-alt"></i></li>
     </ul>`
     let layer_images_ul = document.createElement("ul")

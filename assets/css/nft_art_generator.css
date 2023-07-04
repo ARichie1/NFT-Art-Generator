@@ -337,6 +337,10 @@ form button{
     border-bottom: var(--line);
     opacity: 0; z-index: -3;
 }
+.app .middle .user_layers 
+.on_select .unselect_all{
+    display: none;
+}
 /* on select styles ends here */
 
 /* on pop_up styles starts here */
@@ -395,6 +399,7 @@ form button{
 }
 .app .middle .user_layers 
 .on_import form{
+    position: relative;
     width: 95%; height: 90%;
     display: flex;
     flex-direction: column;
@@ -403,12 +408,112 @@ form button{
     border-radius: 5px;
 }
 .app .middle .user_layers 
+.on_import form .on_import_form_options{
+    position: absolute;
+    top: 2%; right: 2%;
+    width: 100%; height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    display: none;
+}
+.app .middle .user_layers 
+.on_import form 
+.on_import_form_options li{
+    height: 30px;
+    flex-basis: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 5px;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.app .middle .user_layers 
+.on_import form 
+.on_import_form_options .paste_btn{
+    justify-content: flex-end;
+}
+.app .middle .user_layers 
+.on_import form .import_instruction{
+    position: absolute;
+    top: 10%; left: 4%;
+    width: 92%; height: 66%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:flex-start;
+    background: var(--tc3);
+    color: var(--tphc);
+    border-radius: 5px;
+    /* display: none; */
+}
+.app .middle .user_layers 
+.on_import form .import_instruction
+ul{
+    width: 100%; height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.app .middle .user_layers 
+.on_import form .import_instruction
+ul li:nth-child(1){
+    width: 80%; height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.app .middle .user_layers 
+.on_import form .import_instruction
+ul li:nth-child(2){
+    position: relative;
+    width: 20%; height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.app .middle .user_layers 
+.on_import form .import_instruction
+ul li:nth-child(2):active:before{
+    content: "Copied";
+    position: absolute;
+    right: 100%;
+    width: auto; height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--tc2);
+    font-size: 12px;
+}
+.app .middle .user_layers 
+.on_import form .import_instruction
+.code_box{
+    width: 100%; height: 50%;
+    margin-top: 2%;
+    background: var(--ebg);
+    padding-top: 5%;
+    padding-left: 5%;
+}
+.app .middle .user_layers 
+.on_import form .import_instruction
+.continue_to_import{
+    width: 30%;
+    margin-top: 10%;
+    margin-left: 35%;
+}
+.app .middle .user_layers 
 .on_import form textarea{
     width: 95%; height: 70%;
     background: var(--fcw);
     padding-top: 2%;
     display: flex;
     justify-content: flex-start;
+    background: ghostwhite;
 }
 .app .middle .user_layers 
 .on_import form button{
@@ -519,15 +624,16 @@ form button{
     margin-left: 3%;
 }
 
-.app .middle .user_layers
+/* .app .middle .user_layers
 .layers .layer .l_properties span{
     display: flex;
     justify-content: space-between;
-}
+} */
 .app .middle .user_layers
 .layers .layer .l_properties 
 .l_name_container{
     flex-basis: 60%;
+    display: flex;
     justify-content: flex-start;
     justify-content: space-evenly;    
     align-items: center;
@@ -554,6 +660,7 @@ form button{
 .app .middle .user_layers
 .layers .layer .l_properties .l_options{
     flex-basis: 40%;
+    display: flex;
     justify-content: space-evenly;    
     align-items: center;
 }
@@ -565,8 +672,8 @@ form button{
     align-items: center;
     border-radius: 100%;
     background: var(--ebg);
-    z-index: 3; opacity: 1;
     color: var(--tc2);
+    z-index: 3; opacity: 1;
 }
 .app .middle .user_layers
 .layers .layer .l_properties .l_options
@@ -660,7 +767,7 @@ form button{
 }
 
 .app .middle .user_single_layer .single_layer 
-.l_properties span{
+.l_properties div{
     display: flex;
     justify-content: space-between;
 }
@@ -693,7 +800,7 @@ form button{
 }
 .app .middle .user_single_layer .single_layer
 .l_properties .l_name_container .l_name::after{
-    content: "\f107";
+    content: "\f106";
     font-family: FontAwesome;
     position: absolute;
     top: 0%; right: 0%;
@@ -704,6 +811,7 @@ form button{
 .app .middle .user_single_layer .single_layer
 .l_properties .l_options{
     flex-basis: 40%;
+    display: flex;
     justify-content: space-evenly;    
     align-items: center;
 }

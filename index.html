@@ -251,6 +251,25 @@
                                 <li>Import Layers</li>
                             </ul>
                             <form action="" method="">
+                                <ul class="on_import_form_options">
+                                    <li class="clkb_link view_import_format">View Format</li>
+                                    <li class="clkb_link paste_btn"><i class="fa fa-paste"></i>Paste</li>
+                                </ul>
+                                <div class="import_instruction">
+                                    <ul>
+                                        <li>Insert VALID JSON Data Like Below</li>
+                                        <li class="clkb_link copy_btn"><i class="fa fa-copy"></i>Copy</li>
+                                    </ul>
+                                    <div class="code_box">
+                                        [  <br>
+                                            {"name": "background"}, <br>
+                                            {"name": "skin"}, <br>
+                                            {"name": "cloth"}, <br>
+                                            {"name": "mouth"} <br>
+                                        ]
+                                    </div>
+                                    <div class="clkb_btn continue_to_import">Continue</div>
+                                </div>
                                 <textarea type="text" name="import_json_layers" 
                                     class="on_import_input scr scr-y" id="on_import_input">
                                 </textarea>
