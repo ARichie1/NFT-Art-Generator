@@ -62,7 +62,13 @@
     justify-content: space-between;
     align-items: center;
 }
-
+/* .app .left .link_text a{
+    color: var(--tc1);
+    text-decoration: none;
+}
+.app .left .link_text a:hover{
+    color: var(--tc2);
+} */
 .app .left nav ul li{
     position: relative;
     align-items: center;

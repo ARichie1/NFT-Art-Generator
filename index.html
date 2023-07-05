@@ -60,20 +60,20 @@
                         </span>
                         <span class="link_text">Search Layer</span>
                     </li>
-                    <li class="explore main_link clkb_link ltc">
-                        <span class="link_icon">
-                            <i class="fa fa-map"></i>
-                        </span>
-                        <span class="link_text">
-                            Explore
-                        </span>
-                    </li>
                     <li class="theme_and_credits_link main_link clkb_link">
                         <span class="link_icon">
                             <i class="fa fa-paint-brush"></i>
                         </span>
                         <span class="link_text">
                             Theme
+                        </span>
+                    </li>
+                    <li class="explore main_link clkb_link ltc">
+                        <span class="link_icon">
+                            <i class="fa fa-map"></i>
+                        </span>
+                        <span class="link_text">
+                            <a href="https://arichie1.github.io/">Portfolio</a>
                         </span>
                     </li>
                 </ul>
@@ -163,33 +163,37 @@
                     <form action="" method="post" aria-disabled="true">
                         <h3>Create NFT Collection</h3>
                         
-                        <label for="collection_name">Collection Name</label>
-                        <input type="text" name="collection_name" id="collection_name" placeholder="e.g Maxi Infinity">
-                        <label for="collection_description">Collection Description</label>
-                        <textarea maxlength="200" wrap="hard" type="text" class="scr scr-y"
-                            name="collection_description" id="collection_description">
-                        </textarea>
-                        <label for="collection_size">Collection Size</label>
-                        <input type="text" maxlength="5" name="collection_size" id="collection_size" placeholder="100">
-                        <ul class="collection_dimension">
-                            <li>
-                                <label for="output_width">Output Width</label>
+                        <div class="collection_name_container input_container">
+                            <label for="collection_name">Collection Name</label>
+                            <input type="text" name="collection_name" id="collection_name" placeholder="e.g Maxi Infinity">
+                            <p></p>
+                        </div>
+                        <div class="collection_size_container input_container">
+                            <label for="collection_size">Collection Size (Images To Generate)</label>
+                            <input type="text" maxlength="5" name="collection_size" id="collection_size" placeholder="100">
+                            <p></p>
+                        </div>
+                        <ul class="collection_dimension input_container">
+                            <li class="output_width_container">
+                                <label for="output_width">Output Width (px)</label>
                                 <input type="text" maxlength="4" name="output_width" id="output_width" placeholder="e.g 500">
+                                <p></p>
                             </li>
-                            <li>
-                                <label for="output_height">Output Height</label>
+                            <li class="output_height_container">
+                                <label for="output_height">Output Height (px)</label>
                                 <input type="text" maxlength="4" name="output_height" id="output_height" placeholder="e.g 500">
+                                <p></p>
                             </li>
                         </ul>
-                        
-                        <label for="output_format">Output Format</label>
-                        <select type="" name="output_format" id="output_format">
-                            <option value="png">png</option>
-                            <option value="jpg">jpg</option>
-                            <option value="jpeg">jpeg</option>
-                            <option value="webp">webp</option>
-                        </select>
-
+                        <div class="output_format_container input_container">
+                            <label for="output_format">Output Format</label>
+                            <select type="" name="output_format" id="output_format">
+                                <option value="png">png</option>
+                                <option value="jpg">jpg</option>
+                                <option value="jpeg">jpeg</option>
+                                <option value="webp">webp</option>
+                            </select>
+                        </div>
                         <button type="submit" class="clkb_btn">Next</button>
                     </form>
                 </div>

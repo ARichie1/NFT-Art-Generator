@@ -84,7 +84,6 @@ const nft_art_generator_close = document.querySelector(".nft_art_generator .comp
 // Create NFT Collection Component Elements Starts Here
 const create_nft_collection = document.querySelector(".create_nft_collection")
 const collection_name_input = document.querySelector("#collection_name")
-const collection_description_input = document.querySelector("#collection_description")
 const collection_size_input = document.querySelector("#collection_size")
 const collection_width_input = document.querySelector("#output_width")
 const collection_height_input  = document.querySelector("#output_height")
@@ -231,19 +230,16 @@ searcher_link.addEventListener("click", () => {
 if (WINDOW_WIDTH <= SMALL_SCREEN) {
     // Search Elements Functionalities
     search_opener.addEventListener("click", () => {
-        console.log("clicked");
         helper.disappear(search_small_screen_overlay, -5)
         helper.unhide(search_form, "flex")
         helper.unhide(search_form_cancel, "flex")
     })
     search_form_cancel.addEventListener("click", () => {
-        console.log("clicked");
         helper.appear(search_small_screen_overlay, 5)
         helper.hide(search_form)
     })
     search_btn.addEventListener("click", (e) => {
         e.preventDefault()
-        console.log("Searching...");
     })
     search_left_opener.addEventListener("click", () => {
         helper.toggle_many_style_for_one(app_left, [
@@ -254,7 +250,8 @@ if (WINDOW_WIDTH <= SMALL_SCREEN) {
 
     // Elements That Closes Left Menu
     helper.many_actions("click", 
-    [app_right, main_links, landing_page, nft_art_generator, search_opener], 
+    [app_right, main_links, landing_page, nft_art_generator, 
+        search_opener], 
     () => {
         helper.style_many_for_one(app_left, [
             ["left", "-70%"],
@@ -296,6 +293,8 @@ theme_and_credits_close_btn.addEventListener("click", () => {
 // =====Toggle middle to left starts here===== //
 right_tools_in_media_query_opener.onclick = () => {
     helper.toggle_style_many([
+        {name : app_middle,
+            props: [["opacity", "0.5", "1"]]},
         {name : app_right,
             props: [["left", "0%", "100%"], 
             ["z-index", "5", "-5"]]},
@@ -306,32 +305,46 @@ right_tools_in_media_query_opener.onclick = () => {
 // =====Toggle middle to left ends here=====//
 
 // NFT ART GENERATOR FUNCTIONALITIES STARTS HERE
-let collection_name, collection_description, collection_size,
-    collection_width, collection_height, collection_format
+let collection_name = "no_name", collection_size = 10,
+    collection_width = 500, collection_height = 500, collection_format = "png"
 
 // Get Collection Details
 create_nft_collection_button.addEventListener('click', (e) => {
     e.preventDefault()
-    collection_name = collection_name_input.value
-    collection_description = collection_description_input.value
-    collection_size = parseInt(collection_size_input.value)
-    collection_width = parseInt(collection_width_input.value)
-    collection_height = parseInt(collection_height_input.value)
-    collection_format = collection_output_format_input.value
-    
-    // app left tools to show/hide
-    helper.unhide(nft_art_generator_power_off_link, "flex")
-    helper.hide_many([nft_art_generator_setting_up, nft_art_generator_link])
-     
-    // app middle tools to show/hide
-    helper.hide(create_nft_collection)
-    helper.unhide(user_layers, "block")
-    helper.unhide(nft_art_generator_close, "flex")
-    // app right tools to show/hide
-    helper.hide(free_frame_container)
-    helper.unhide(generator_preview_container, "block")
 
-    fetch_and_activate_dom_layers()
+    //  Get Collecton Inputs With Error Display Container
+    let collection_inputs = [collection_name_input, collection_size_input, 
+        collection_width_input, collection_height_input]
+
+     //  Check if input is empty if empty add input to (invalid_input) 
+     // else cleans error
+    let invalid_inputs = helper.check_or_clean_error_msg(collection_inputs);
+
+    // Check if ther are invalid inputs firts
+    if (invalid_inputs.length > 0) {
+        helper.render_error_msg(invalid_inputs)
+    }
+    // else continue with collection creation
+    else{
+        collection_name = collection_name_input.value
+        collection_size = parseInt(collection_size_input.value)
+        collection_width = parseInt(collection_width_input.value)
+        collection_height = parseInt(collection_height_input.value)
+        collection_format = collection_output_format_input.value
+        
+        // app left tools to show/hide
+        helper.unhide(nft_art_generator_power_off_link, "flex")
+        helper.hide_many([nft_art_generator_setting_up, nft_art_generator_link])
+        
+        // app middle tools to show/hide
+        helper.hide(create_nft_collection)
+        helper.unhide(user_layers, "block")
+        helper.unhide(nft_art_generator_close, "flex")
+        // app right tools to show/hide
+        helper.hide(free_frame_container)
+        helper.unhide(generator_preview_container, "block")
+        fetch_and_activate_dom_layers()
+    } 
 })
 
 // User Layers Functionalities Starts Here
@@ -577,7 +590,6 @@ let layers_counter = (() => {
 // and converts them to html dom elements
 let load_layers_container = (() => {
     LAYERS = get_layers()
-    console.log(LAYERS);
     layers_container.innerHTML = ""
     for (const layer_key in LAYERS) {
         if (Object.hasOwnProperty.call(LAYERS, layer_key)) {
@@ -592,13 +604,11 @@ let load_layers_container = (() => {
 
 let load_single_layer_container = ((sl_name) => {
     single_layer = get_layer(sl_name)
-    console.log(single_layer);
 
     single_layer_container.innerHTML = ""
     single_layer_container.appendChild(append_layer(single_layer, "one"))
 
     dom_single_layer = single_layer_container.querySelector(".single_layer")
-    console.log(dom_single_layer);
 
     return dom_single_layer
 })
@@ -696,12 +706,10 @@ import_layer_link.addEventListener("click", () => {
 
 // Control Import Copy/Paste
 on_import_copy_btn.addEventListener("click", () => {
-    console.log("copied");
     let text = on_import_code_box.innerText;
     helper.copy_content(text)
 })
 on_import_paste_btn.addEventListener("click", () => {
-    console.log("pasted");
     helper.paste_content(on_import_input)
 })
 
@@ -761,7 +769,6 @@ create_layer_link.addEventListener("click", () => {
 })
 on_create_button.addEventListener("click", (e) => {
     e.preventDefault()
-    console.log();
     let new_layer_name = on_create_input.value.toString().toLowerCase()
     let new_layer_id = (helper.count_keys(LAYERS) + 1).toString()
     // let new_layer = new Layer(new_layer_name, 
@@ -811,12 +818,12 @@ on_generate_close.addEventListener('click', () => {
 })
 
 // Generate a Test Art
-test_art_preview_canvas.width = collection_width
-test_art_preview_canvas.height = collection_height
 let test_art_url;
-let test_art_preview_canvas_context = test_art_preview_canvas.getContext("2d")
-build_test_btn.addEventListener("click", () => {
-    console.log(collection_width, collection_height);
+build_test_btn.addEventListener("click", () => { 
+    test_art_preview_canvas.width = collection_width
+    test_art_preview_canvas.height = collection_height
+    let test_art_preview_canvas_context = test_art_preview_canvas.getContext("2d")
+
     let test_resource = build_test_resource(get_layers())
     test_art_preview_canvas_context.clearRect(0, 0,
         test_art_preview_canvas.width,
@@ -841,8 +848,10 @@ build_test_btn.addEventListener("click", () => {
     helper.hide(build_test_btn)
 
     // Display The Test Art Preview and Image Info
-    test_art_downloader_items[0].innerHTML = "500 x 500"
-    test_art_downloader_items[1].innerHTML = "test_art.png"
+    // test_art_downloader_items[0].innerHTML = `500 x 500`
+    test_art_downloader_items[0].innerHTML = `${collection_width} x ${collection_height}`
+    // test_art_downloader_items[1].innerHTML = "test_art.png"
+    test_art_downloader_items[1].innerHTML = `test_art.${collection_format}`
     generator_preview_frames_links[1].click()
     if (WINDOW_WIDTH <= 900) {
         right_tools_in_media_query_opener.click()
@@ -851,15 +860,14 @@ build_test_btn.addEventListener("click", () => {
 // Generate a Test Art Ends Here
 
 // Generate a random collection
-collection_image_generator_canvas.width = collection_width
-collection_image_generator_canvas.height = collection_height
-let collection_image_generator_canvas_context = collection_image_generator_canvas.getContext("2d")
 let collection_art_urls = []
 on_generate_options[1].addEventListener("click", (e) => {
-    
-    console.log(collection_width, collection_height);
+    collection_image_generator_canvas.width = collection_width
+    collection_image_generator_canvas.height = collection_height
+    let collection_image_generator_canvas_context = collection_image_generator_canvas.getContext("2d")
+
     let collection_resource = build_collection_resource(get_layers())
-    
+
     // Empty Previously Generated Content
     generated_arts_container.innerHTML = ""
 
@@ -919,7 +927,6 @@ test_art_downloader_items[2].onclick = () => {
 
 // DOWNLOAD GENERATED COLLECTION STARTS HERE
 collection_download_btn.onclick = () => {
-    console.log(collection_art_urls);
     let cnt = 0
     collection_art_urls.forEach( url => {
         let a = document.createElement("a")
@@ -988,7 +995,7 @@ let shutdown_nft_art_generator = () => {
 helper.many_actions("click", 
 [nft_art_generator_power_off_link, nft_art_generator_close], () => {
     let msg = `You are about poweroff the art generator <br>
-    <p> !!ALL LAYERS AND THE COLLECTION ITSELF WILL BE DELETED !!</p>`
+    <p>${collection_name} will be deleted !!</p>`
     let btns = [
         {text: "No", class:"notification_close n_clear", id:"##" + notification_screen.className},
         {text: "Yes", class:"notification_close", id: "deletes_something"}

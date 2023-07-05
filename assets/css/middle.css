@@ -65,7 +65,7 @@
     align-items: center;
     text-align: center;
     width: 100%;
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 .app .middle .notification_screen .notification_props
 .notification_btns{
@@ -207,6 +207,7 @@
 }
 .app .middle .theme_and_credits
 .credits ul li a{
+    appearance: none;
     text-decoration: none;
 }
 /* THEME SETTING AND CREDITS STARTS HERE */

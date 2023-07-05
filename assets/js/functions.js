@@ -488,24 +488,67 @@ this.reset_sliders = (default_values, sliders) => {
     this.copy_content = async (text) => {
         try {
             await navigator.clipboard.writeText(text);
-            console.log('Content copied to clipboard');
-            console.log(text);
         } catch (err) {
-            console.error('Failed to copy: ', err);
+            console.error('Failed to copy content : ', err);
+            let msg = "Failed to copy content"
+            let btns = [{text: "Ok", class:"notification_close n_clear",
+                 id:"##" + notification_screen.className}]
+            this.notification_box(nft_art_generator, notification_screen,
+                {type: "alert !!!", msg, btns}
+            )
         }
     }
     this.paste_content = async (destination) => {
         try {
             let clip_text = await navigator.clipboard.readText();
-            console.log('Content copied to clipboard');
-            console.log(clip_text);
             destination.innerHTML = clip_text
-            console.log(destination);
         } catch (err) {
-            console.error('Failed to copy: ', err);
+            console.error('Failed to paste content : ', err);
+
+            let msg = "Failed to paste content"
+            let btns = [{text: "Ok", class:"notification_close n_clear",
+                 id:"##" + notification_screen.className}]
+            this.notification_box(nft_art_generator, notification_screen,
+                {type: "alert !!!", msg, btns}
+            )
         }
     }
 // =====CLIPBOARD COPY AND PASTE ENDS HERE===== //
 
+// =====FORM FUNCTIONS STARTS HERE===== //
+    // DISPLAYS INPUT FIELD ERROR MESSAGE
+    this.render_error_msg = (inputs) => {
+        let input_error_printer = (input) => {
+            let error_msg_container = document.querySelector(`.${input.id}_container p`)
+            error_msg_container.innerHTML = `Please enter a ${input.id.split("_")[1]}`
+        }
+        if (inputs.length) {
+            inputs.forEach(input => {
+                input_error_printer(input)
+            }); 
+        }else{
+            input_error_printer(inputs)
+        }
+    }
+
+    // CHECKS IF AN INPUT THAT IS EMPTY
+    // IF EMPTY INPUT BECOMES INVALID ELSE VALID
+    this.check_or_clean_error_msg = (inputs) => {
+        let invalid_inputs = [];
+        let verify_error = (input) => {
+            if (input.value == "") {
+                if (!invalid_inputs.includes(input)) invalid_inputs.push(input)
+            }else{
+                let error_msg_container = document.querySelector(`.${input.id}_container p`)
+                error_msg_container.innerHTML = ``
+            }
+        }
+        if (inputs.length) {
+            inputs.forEach(input => {verify_error(input)})
+        }else verify_error(inputs)
+
+        return invalid_inputs
+    }
+// =====FORM FUNCTIONS ENDS HERE===== //
 }
 // =====CLASS (Help_me) ENDS HERE===== //

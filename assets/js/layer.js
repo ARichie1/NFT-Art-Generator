@@ -55,12 +55,10 @@ class Layer{
         if (this.checked) {
             if (!checked_layers.includes(this.name)) {
                 checked_layers.push(this.name)
-                console.log("cl : ", checked_layers);
             }
         }else{
             if (checked_layers.includes(this.name)) {
                 checked_layers = helper.remove_element(checked_layers, this.name)
-                console.log("cl : ", checked_layers);
             }
         }
     }

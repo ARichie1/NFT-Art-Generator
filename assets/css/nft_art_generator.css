@@ -39,6 +39,10 @@ form h3{
     margin-bottom: 10%;
 }
 .app .middle .create_nft_collection
+form .input_container{
+    width: 100%;
+}
+.app .middle .create_nft_collection
 form input{
     width: 100%; height: 30px;
     display: flex;
@@ -59,8 +63,8 @@ form ul{
     align-items: center;
 }
 .app .middle .create_nft_collection
-form ul li{width: 45%; position: relative;}
-.app .middle .create_nft_collection
+form ul li{width: 47%; position: relative;}
+/* .app .middle .create_nft_collection
 form ul li label::after{
     content: "px";
     position: absolute;
@@ -68,6 +72,13 @@ form ul li label::after{
     width: 30%; height: 25px;
     text-align: center; 
     border-radius: 5px;
+} */
+.app .middle .create_nft_collection
+form p{
+    width: 100%; 
+    border-radius: 5px;
+    font-size: 12px;
+    color: red;
 }
 .app .middle .create_nft_collection
 form ul li input{margin-top: 4%;}

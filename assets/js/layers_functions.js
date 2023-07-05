@@ -25,17 +25,12 @@ let CHECKED_IMAGES = []
     let change_layer_name = (change_btn, input_value, layers, layer_object, 
         nft_generator, notification_screen, close_rename, func_a, func_b) => {
         change_btn.addEventListener("click", () => {
-            console.log(layers);
-            console.log(input_value);
             let name_exist_in_layers = helper.has_key(layers, input_value)
             
-            console.log(name_exist_in_layers );
             if (input_value === layer_object.name){
-                console.log("same name man");
                 close_rename.click()
             }
             else if (name_exist_in_layers && input_value != layer_object.name ) {
-                console.log("hass");
                 helper.fade(nft_generator)
                 helper.notification_box(nft_generator, notification_screen, 
                     {
@@ -56,7 +51,6 @@ let CHECKED_IMAGES = []
                 })
             }
         }else{
-            console.log("hasnot");
             layer_object.rename(input_value)
             setTimeout(() => {
                 if (func_b) func_b(layer_object.name)
@@ -122,7 +116,6 @@ let delete_a_layer = (delete_btn, layer_object, layers_container,
 let add_images = (uploader_files, layer_object, func_a, func_b) => {
     for (const file_key in uploader_files) {
         const file = uploader_files[file_key];
-        console.log(file);
         let blob_url = new Blob([file], {type: 'image/png'})
         let nft_reader = new FileReader()
         nft_reader.readAsDataURL(blob_url)
@@ -147,10 +140,7 @@ let add_image_options = (
     layer_images_containers, layer_object,
     collection_width, collection_height,
     func_a, func_b) => {
-        console.log(layer_images_containers);
 
-        
-    console.log(collection_width, collection_height);
     let give_image_options = (layer_images_container) => {
         let split_id = layer_images_container.getAttribute("id").split("_")
         let lic_id = split_id[1]
@@ -288,7 +278,6 @@ let build_test_resource = (layers) => {
             const layer = layers[layer_key];
             if (currently_checked_images.length > 0) {
                 if (layer.images[`${currently_checked_images[i]}`]){
-                    console.log("has-img");
                     resource.push(layer.images[`${currently_checked_images[i]}`]["img"])
                 }
             }else{
@@ -327,15 +316,12 @@ let build_collection_resource = (layers) => {
 // Bundle and Generate art based on the resource provided
 // then display to canvas
 let build_composite = (resource, canvas_context, canvas_width, canvas_height) => {
-    console.log(canvas_context);
     if (resource.length > 0) {
-        console.log(" r > 0");
         for (let i = 0; i < resource.length; i++) {
             // Build Art By Getting A Random Image From Each Layer
             if (resource[i].length){
                 if (resource[i].length > 0) {
                     let random_layer_image_index = Math.floor(Math.random() * resource[i].length)
-                    console.log(random_layer_image_index);
                     let random_layer_image = resource[i][random_layer_image_index]
                     canvas_context.imageSmoothingQuality = "high"
                     canvas_context.drawImage(random_layer_image, 0, 0, canvas_width, canvas_height)
@@ -344,7 +330,6 @@ let build_composite = (resource, canvas_context, canvas_width, canvas_height) =>
             // Build An Test Art Based On Checked Layers
             else{
                 let layer_image = resource[i]
-                console.log(layer_image);
                 canvas_context.imageSmoothingQuality = "high"
                 canvas_context.drawImage(layer_image, 0, 0, canvas_width, canvas_height)
             }
