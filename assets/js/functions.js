@@ -295,7 +295,7 @@ this.many_actions = function (event, elem, func) {
 // =====MANY ACTIONS ENDS HERE===== //
 
 // =====SWAP THE STATE OF AN ELEMENT STARTS HERE===== //
-this.elements_state_swap = function (elements_class, state, display) {
+this.elements_state_swap = function (elements_class, state, display, slide_to) {
     let elem, elems;
     let opacity = "1";
     let z_index = "3";
@@ -305,6 +305,7 @@ this.elements_state_swap = function (elements_class, state, display) {
         e.style.zIndex = z_index
         e.setAttribute("state", state)
         if (display) e.style.display = display
+        if (slide_to) e.style.left = slide_to;
     }
     if (typeof(elements_class) == "object") {
         elements_class.forEach(ele_class => {
@@ -483,6 +484,7 @@ this.reset_sliders = (default_values, sliders) => {
     })
 // =====NOTIFICATION_BOX FUNCTIONS ENDS HERE=====//
 
+// =====CLIPBOARD COPY AND PASTE STARTS HERE===== //
     this.copy_content = async (text) => {
         try {
             await navigator.clipboard.writeText(text);
@@ -503,5 +505,7 @@ this.reset_sliders = (default_values, sliders) => {
             console.error('Failed to copy: ', err);
         }
     }
+// =====CLIPBOARD COPY AND PASTE ENDS HERE===== //
+
 }
 // =====CLASS (Help_me) ENDS HERE===== //

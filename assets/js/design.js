@@ -41,7 +41,8 @@ const nft_art_generator_link = document.querySelector(".generator_link")
 const nft_art_generator_setting_up = document.querySelector("#generator_setting_up")
 const nft_art_generator_power_off_link = document.querySelector("#generator_power_off_link")
 
-const searcher_link= document.querySelector(".searcher_link")
+const searcher_link = document.querySelector(".searcher_link")
+const theme_and_credits_link = document.querySelector(".theme_and_credits_link")
 
 const link_icons = document.querySelectorAll(".link_icon")
 const link_texts = document.querySelectorAll(".link_text")
@@ -56,6 +57,11 @@ const middle_close_component_links = document.querySelectorAll(".middle .close")
 // Landing Page Elements Starts Here
 const landing_page = document.querySelector(".landing_page")
 const landing_page_btn = document.querySelector(".landing_page button")
+
+// Theme and Credits Page Elements Starts Here
+const theme_and_credits_container = document.querySelector(".theme_and_credits")
+const theme_and_credits_close_btn = document.querySelector(".theme_and_credits .remove_component")
+const theme_change_btn = document.querySelector(".theme_and_credits .theme_mode .clkb_btn")
 
 // Searchbar Elements Starts Here
 const searchbar = document.querySelector(".searchbar")
@@ -190,7 +196,7 @@ const notification_screen = document.querySelector(".notification_screen")
 
 // =====MEDIA QUERY ELEMENTS STARTS HERE===== //
 const right_tools_in_media_query_container = document.querySelector(".right_tools_in_media_query")
-const right_tools_in_media_query_openers = document.querySelectorAll(".right_tools_in_media_query li")
+const right_tools_in_media_query_opener = document.querySelector(".right_tools_in_media_query li")
 // =====MEDIA QUERY ELEMENTS ENDS HERE===== //
 
 // =====DESIGN LOGIC STARTS HERE===== //
@@ -262,6 +268,7 @@ if (WINDOW_WIDTH <= SMALL_SCREEN) {
 
 // =====MIDDLE SIDE STARTS HERE=====//
 
+// Open Generator Starts Here
 helper.many_actions("click", [landing_page_btn, nft_art_generator_link], () => {
     helper.hide(nft_art_generator_link)
     helper.unhide(nft_art_generator_setting_up, "flex")
@@ -272,8 +279,22 @@ helper.many_actions("click", [landing_page_btn, nft_art_generator_link], () => {
 
     if (WINDOW_WIDTH <= 900) helper.disappear(nft_art_generator_component_opener)
 })
+// Open Generator Ends Here
+
+// Open Theme Setting and Credits Starts Here
+theme_and_credits_link.addEventListener("click", () => {
+    helper.appear(theme_and_credits_container, "8")
+})
+// theme_change_btn.addEventListener("click", () => {
+//     helper.elements_state_swap("theme_and_credits", "opened")
+// })
+theme_and_credits_close_btn.addEventListener("click", () => {
+    helper.disappear(theme_and_credits_container, "-8")
+})
+// Open Theme Setting and Credits Ends Here
+
 // =====Toggle middle to left starts here===== //
-right_tools_in_media_query_openers[0].onclick = () => {
+right_tools_in_media_query_opener.onclick = () => {
     helper.toggle_style_many([
         {name : app_right,
             props: [["left", "0%", "100%"], 
@@ -413,13 +434,13 @@ let fetch_and_activate_dom_layers = (() => {
             })
 
             // Enable Image Options
-            add_image_options(
-                layers_container, layer_images_containers, layer_obj, 
-                500, 500, fetch_and_activate_dom_layers)
             // add_image_options(
             //     layers_container, layer_images_containers, layer_obj, 
-            //     collection_width, collection_height,
-            //     fetch_and_activate_dom_layers)
+            //     500, 500, fetch_and_activate_dom_layers)
+            add_image_options(
+                layers_container, layer_images_containers, layer_obj, 
+                collection_width, collection_height,
+                fetch_and_activate_dom_layers)
 
             // Enter Generating Test Art Mode and Select Images
             select_test_images(on_generate_options[0],
@@ -547,6 +568,7 @@ let layers_counter = (() => {
         on_create_container.id = "box_mode"
     }else{
         helper.unhide(searcher_link, "flex")
+        helper.disappear(right_tools_in_media_query_container, "-8")
     }
 });
 
@@ -644,11 +666,11 @@ let fetch_and_activate_dom_single_layer = ((sl_name) => {
             fetch_and_activate_dom_single_layer)
         })
         // Enable Image Options
-        add_image_options(layer_images_containers, layer_obj, 500, 500,
-            fetch_and_activate_dom_layers, fetch_and_activate_dom_single_layer)
-        // add_image_options(layer_images_containers, layer_obj,
-        //     collection_width, collection_height,
+        // add_image_options(layer_images_containers, layer_obj, 500, 500,
         //     fetch_and_activate_dom_layers, fetch_and_activate_dom_single_layer)
+        add_image_options(layer_images_containers, layer_obj,
+            collection_width, collection_height,
+            fetch_and_activate_dom_layers, fetch_and_activate_dom_single_layer)
     // LAYER IMAGES FUNCTIONALITY ENDS HERE
 })
 // FETCHES THE NEWLY UPDATED LAYER FROM THE DOM ENDS HERE
@@ -700,9 +722,9 @@ on_import_button.addEventListener("click", (e) => {
     let new_json_layers = JSON.parse(on_import_input.value)
     new_json_layers.forEach(njl => {
         let nl_id = (helper.count_keys(LAYERS) + 1).toString()
-        let nl = new Layer(njl.name, nl_id, [500, 500])
-        // let nl = new Layer(njl.name, nl_id, 
-        //     [collection_width, collection_height])
+        // let nl = new Layer(njl.name, nl_id, [500, 500])
+        let nl = new Layer(njl.name, nl_id, 
+            [collection_width, collection_height])
     
         nl.add_to_layers()
         fetch_and_activate_dom_layers()
@@ -710,6 +732,8 @@ on_import_button.addEventListener("click", (e) => {
     user_layers_prev_components.push("on_import")
     user_layers_current_component = ["art_generator_crud_tools", "layers"]
     switch_user_layers_component()
+
+    helper.appear(right_tools_in_media_query_container, "8")
 
     on_create_container.id = "quick_mode"
     on_import_input.value = ""
@@ -740,16 +764,18 @@ on_create_button.addEventListener("click", (e) => {
     console.log();
     let new_layer_name = on_create_input.value.toString().toLowerCase()
     let new_layer_id = (helper.count_keys(LAYERS) + 1).toString()
-    let new_layer = new Layer(new_layer_name, 
-        new_layer_id, [500, 500])
     // let new_layer = new Layer(new_layer_name, 
-    //     new_layer_id, [collection_width, collection_height])
+    //     new_layer_id, [500, 500])
+    let new_layer = new Layer(new_layer_name, 
+        new_layer_id, [collection_width, collection_height])
     new_layer.add_to_layers()
     fetch_and_activate_dom_layers()
 
     user_layers_prev_components.push("on_create")
     user_layers_current_component = ["art_generator_crud_tools", "layers"]
     switch_user_layers_component()
+
+    helper.appear(right_tools_in_media_query_container, "8")
 
     on_create_input.value = ""
     on_create_container.id = "quick_mode"
@@ -785,11 +811,12 @@ on_generate_close.addEventListener('click', () => {
 })
 
 // Generate a Test Art
-test_art_preview_canvas.width = 500
-test_art_preview_canvas.height = 500
+test_art_preview_canvas.width = collection_width
+test_art_preview_canvas.height = collection_height
 let test_art_url;
 let test_art_preview_canvas_context = test_art_preview_canvas.getContext("2d")
 build_test_btn.addEventListener("click", () => {
+    console.log(collection_width, collection_height);
     let test_resource = build_test_resource(get_layers())
     test_art_preview_canvas_context.clearRect(0, 0,
         test_art_preview_canvas.width,
@@ -817,23 +844,27 @@ build_test_btn.addEventListener("click", () => {
     test_art_downloader_items[0].innerHTML = "500 x 500"
     test_art_downloader_items[1].innerHTML = "test_art.png"
     generator_preview_frames_links[1].click()
-    right_tools_in_media_query_openers[0].click()
+    if (WINDOW_WIDTH <= 900) {
+        right_tools_in_media_query_opener.click()
+    }
 })
 // Generate a Test Art Ends Here
 
 // Generate a random collection
-collection_image_generator_canvas.width = 500
-collection_image_generator_canvas.height = 500
+collection_image_generator_canvas.width = collection_width
+collection_image_generator_canvas.height = collection_height
 let collection_image_generator_canvas_context = collection_image_generator_canvas.getContext("2d")
 let collection_art_urls = []
 on_generate_options[1].addEventListener("click", (e) => {
+    
+    console.log(collection_width, collection_height);
     let collection_resource = build_collection_resource(get_layers())
     
     // Empty Previously Generated Content
     generated_arts_container.innerHTML = ""
 
-    // for (let i = 0; i < collection_size; i++) {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < collection_size; i++) {
+    // for (let i = 0; i < 10; i++) {
         collection_image_generator_canvas_context.clearRect(0, 0,
             collection_image_generator_canvas.width,
             collection_image_generator_canvas.height)
@@ -857,7 +888,9 @@ on_generate_options[1].addEventListener("click", (e) => {
 
     // Display The Collection Preview
     generator_preview_frames_links[2].click()
-    right_tools_in_media_query_openers[0].click()
+    if (WINDOW_WIDTH <= 900) {
+        right_tools_in_media_query_opener.click()
+    }
     
     // Display Image In The Preview Box Onclick
     let collection_images = generated_arts_container.querySelectorAll("img")
@@ -877,8 +910,8 @@ test_art_downloader_items[2].onclick = () => {
     let a = document.createElement("a")
     a.href = test_art_url
     // Set The Output Image Name
-    // a.download = `test_art.${collection_format}`
-    a.download = `test_art.png`
+    a.download = `test_art.${collection_format}`
+    // a.download = `test_art.png`
     // Initiate The Download
     a.click()
 }
@@ -892,8 +925,8 @@ collection_download_btn.onclick = () => {
         let a = document.createElement("a")
         a.href = url
         // Set The Output Image Name
-        // a.download = `${collection_name}_${cnt}.${collection_format}`
-        a.download = `z_${cnt}.png`
+        a.download = `${collection_name}_${cnt}.${collection_format}`
+        // a.download = `z_${cnt}.png`
         // Initiate The Download
         a.click()
         cnt++
@@ -903,27 +936,25 @@ collection_download_btn.onclick = () => {
 
 // Generator Preview Controllers
 generator_preview_frames_links[0].addEventListener("click", () => {
-    layer_image_preview_container.style.left = "0%"
-    helper.appear(layer_image_preview_container)
-    test_art_preview_container.style.left = "100%"
-    collection_preview_container.style.left = "100%"
-    helper.disappear([test_art_preview_container, collection_preview_container])
-
+    helper.elements_state_swap(
+        ["layer_image_preview_frame"], "opened", "flex", "0%")    
+    helper.elements_state_swap(
+        ["test_art_preview_frame", "collection_preview_frame"],
+         "closed", "none", "100%")
 })
 generator_preview_frames_links[1].addEventListener("click", () => {
-    test_art_preview_container.style.left = "0%"
-    helper.appear(test_art_preview_container)
-    layer_image_preview_container.style.left = "100%"
-    collection_preview_container.style.left = "100%"
-    helper.disappear([layer_image_preview_container, collection_preview_container])
-
+    helper.elements_state_swap(
+        ["test_art_preview_frame"], "opened", "flex", "0%")    
+    helper.elements_state_swap(
+        ["layer_image_preview_frame", "collection_preview_frame"],
+         "closed", "none", "100%")
 })
 generator_preview_frames_links[2].addEventListener("click", () => {
-    collection_preview_container.style.left = "0%"
-    helper.appear(collection_preview_container)
-    layer_image_preview_container.style.left = "100%"
-    test_art_preview_container.style.left = "100%"
-    helper.disappear([layer_image_preview_container, test_art_preview_container])
+    helper.elements_state_swap(
+        ["collection_preview_frame"], "opened", "flex", "0%")    
+    helper.elements_state_swap(
+        ["layer_image_preview_frame", "test_art_preview_frame"],
+         "closed", "none", "100%")
 })
 
 // Generate NFT Art Functionalities Starts Here
@@ -947,7 +978,9 @@ let shutdown_nft_art_generator = () => {
 
     helper.unhide(nft_art_generator_link, "flex")
     helper.hide_many([nft_art_generator_setting_up, nft_art_generator_power_off_link])
-
+    
+    helper.disappear(right_tools_in_media_query_container, "-8")
+    
     helper.elements_state_swap("nft_art_generator", "closed")
     helper.elements_state_swap("landing_page", "opened")
 }

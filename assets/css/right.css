@@ -166,6 +166,16 @@
 }
 /* GENERATOR PREVIEW STYLES ENDS HERE */
 
+/* MEDIA QUERY STARTS HERE */
+@media screen and (max-width: 900px) {
+    /* APP RIGHT MQ STARTS HERE */
+    .app .right{left: 100%; width: 100%;}
+    .app .right .generator_preview
+    .collection_preview_frame
+    .collection_download_btn{
+        bottom: 15% !important;
+    }
+}
 
 
 

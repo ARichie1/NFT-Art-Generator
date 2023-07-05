@@ -149,6 +149,8 @@ let add_image_options = (
     func_a, func_b) => {
         console.log(layer_images_containers);
 
+        
+    console.log(collection_width, collection_height);
     let give_image_options = (layer_images_container) => {
         let split_id = layer_images_container.getAttribute("id").split("_")
         let lic_id = split_id[1]
@@ -284,12 +286,11 @@ let build_test_resource = (layers) => {
     for (const layer_key in layers) {
         if (Object.hasOwnProperty.call(layers, layer_key)) {
             const layer = layers[layer_key];
-            console.log(layer);
-            console.log(currently_checked_images);
             if (currently_checked_images.length > 0) {
-                console.log(CHECKED_IMAGES[i]);
-                console.log(layer.images[`${currently_checked_images[i]}`]["img"]);
-                resource.push(layer.images[`${currently_checked_images[i]}`]["img"])
+                if (layer.images[`${currently_checked_images[i]}`]){
+                    console.log("has-img");
+                    resource.push(layer.images[`${currently_checked_images[i]}`]["img"])
+                }
             }else{
                 console.log("Go Check An Image");
             }

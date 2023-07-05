@@ -142,13 +142,134 @@
     transition: .1 ease-in-out;
 }
 
+/* THEME SETTING AND CREDITS STARTS HERE */
+.app .middle .theme_and_credits{
+    position: absolute;
+    top: 2%; left: 2%;
+    height: 96%; width: 96%;
+    padding-top: 20%;
+    font-size: 16px;
+    background: var(--tc3);
+    overflow: hidden;
+    transition: .1 ease-in-out;
+    opacity: 0; z-index: -3;
+}
+.app .middle .theme_and_credits h3{
+    width: 100%; text-align: center;
+    border-bottom: var(--line) ;
+}
+.app .middle .theme_and_credits h4{
+    width: 80%; height: 40%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.app .middle .theme_and_credits
+.tac_div{
+    height: 20%; width: 100%;
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 10%;
+}
+.app .middle .theme_and_credits 
+.theme_mode{
+    width: 80%; height: 20%;
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+} 
+.app .middle .theme_and_credits
+.theme_mode .clkb_btn{
+    width: 50%; height: 40px;
+    display: flex; 
+    justify-content: space-evenly;
+    align-items: center;
+}
+.app .middle .theme_and_credits
+.credits h4{
+    border-bottom: var(--line);
+    margin-bottom: 2%;
+}
+.app .middle .theme_and_credits
+.credits ul{
+    width: 80%; height: auto;
+    display: flex; 
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: flex-start;
+}
+.app .middle .theme_and_credits
+.credits ul li{
+    width: 100%; height: 30px;
+}
+.app .middle .theme_and_credits
+.credits ul li a{
+    text-decoration: none;
+}
+/* THEME SETTING AND CREDITS STARTS HERE */
 
-
+/* MEDIA QUERY STARTS HERE */
 .app .middle
 .right_tools_in_media_query{
     display: none;
 }
 @media screen and (max-width:900px){
+
+    /* Search MQ Styles */
+    .app .middle{left: 0%; width: 100%;}
+    .app .middle .searchbar{
+        opacity: 1 !important; z-index: 5 !important;
+        height: 5% !important;
+    }
+    .app .middle .searchbar form{display: none;}
+    .app .middle .searchbar form .form_cancel{
+        display: flex; justify-content: center; 
+        align-items: center;
+        width: 10%; height: 100%;}
+    .app .middle .searchbar form input{
+        width: 90% !important;}
+    .app .middle .searchbar 
+    .search_small_screen_overlay{
+        position: absolute;
+        top: 0%;left: 0%;
+        width: 100%; height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0% 2%;
+        font-size: var(--fsxl);
+        font-weight: bold;
+        z-index: 5;
+    }
+
+    /* Theme Setting and Credits */
+    .app .middle .theme_and_credits{
+        top: 7%; height: 91%;}
+
+    /* Editor MQ Styles*/ 
+    .app .middle .nft_generator{height: 95% !important;}
+
+    /* NFT Generator Styles */
+    .app .middle .user_layers{
+        padding: 2%;
+    }
+    .app .middle .user_layers 
+    #create_select_has_no_layers{
+        flex-direction: column;
+    }
+    .app .middle .user_layers 
+    #create_select_has_no_layers .start_import{
+        margin-bottom: 2%
+    }
+    .app .middle .user_layers 
+    #create_select_has_no_layers .create_layer{
+        margin-top: 2%;
+    }
+
+    /* MQ Tool Starts here */
     .app .middle .right_tools_in_media_query{
         position: absolute;
         right: 4%; bottom: 10%;
@@ -157,7 +278,7 @@
         flex-direction: column;
         justify-content: flex-end;
         align-items: center;
-        z-index: 6;
+        opacity: 0; z-index: -8;
     }
     .app .middle .right_tools_in_media_query li{
         height: 30px; width: 30px;
