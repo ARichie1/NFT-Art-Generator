@@ -262,6 +262,11 @@ form button{
     width: 70%; height: 25px;
 }
 .app .middle .user_layers 
+#box_mode form p{
+    color: red;
+    display: none;
+}
+.app .middle .user_layers 
 #box_mode form button{
     width: 70%; height: 25px;
 }
@@ -321,6 +326,17 @@ form button{
 .app .middle .user_layers 
 #quick_mode form input{
     width: 70%; height: 25px;
+}
+.app .middle .user_layers 
+#quick_mode form p{
+    position: absolute;
+    top: 100%; width: 65%;
+    background: var(--ebg);
+    color: red;
+    border-radius: 5px;
+    font-size: 14px;
+    padding-left: 3%;
+    display: none;
 }
 .app .middle .user_layers 
 #quick_mode form button{
@@ -635,11 +651,6 @@ ul li:nth-child(2):active:before{
     margin-left: 3%;
 }
 
-/* .app .middle .user_layers
-.layers .layer .l_properties span{
-    display: flex;
-    justify-content: space-between;
-} */
 .app .middle .user_layers
 .layers .layer .l_properties 
 .l_name_container{
@@ -901,8 +912,10 @@ ul li:nth-child(2):active:before{
 .l_on_rename,
 .app .middle .user_single_layer .l_properties 
 .l_on_rename{
-    width: 96%;
-    margin: 0% 2%;
+    width: 100%;
+    /* margin: 0% 2%; */
+    display: flex;
+    justify-content: space-evenly;
     display: none;
 }
 .app .middle .user_layers

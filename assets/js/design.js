@@ -111,6 +111,7 @@ const create_layer_link = document.querySelector(".create_layer")
 const on_create_container  = document.querySelector(".on_create")
 const on_create_close  = document.querySelector(".on_create_close")
 const on_create_input  = document.querySelector(".on_create_input")
+const on_create_error_container  = document.querySelector(".on_create form p")
 const on_create_button  = document.querySelector(".on_create button")
 
 const select_layer_link  = document.querySelector(".select_layer")
@@ -332,6 +333,11 @@ create_nft_collection_button.addEventListener('click', (e) => {
         collection_height = parseInt(collection_height_input.value)
         collection_format = collection_output_format_input.value
         
+        // Clear On Import Form
+        on_import_input.value = ""
+        // Clear On Create Form
+        on_create_input.value = ""
+
         // app left tools to show/hide
         helper.unhide(nft_art_generator_power_off_link, "flex")
         helper.hide_many([nft_art_generator_setting_up, nft_art_generator_link])
@@ -640,10 +646,11 @@ let fetch_and_activate_dom_single_layer = ((sl_name) => {
     let l_change_name_btn = layer_properties.querySelector(".l_on_rename .l_change_name") 
 
     // CLOSE SINGLE LAYER PAGE FUNCTIONALITY STARTS HERE  
-        l_closer_btn.addEventListener("click", () => {
-            fetch_and_activate_dom_layers()
-            close_user_layers_component()
-        })
+    helper.many_actions("click", [l_name_container, l_closer_btn],
+    () => {
+        fetch_and_activate_dom_layers()
+        close_user_layers_component()
+    })
     // CLOSE SINGLE LAYER PAGE FUNCTIONALITY ENDS HERE 
 
     // LAYER RENAME FUNCTIONALITY STARTS HERE 
@@ -727,24 +734,36 @@ on_import_view_format_btn.addEventListener("click", () => {
 // import the layers in the import conponent text area
 on_import_button.addEventListener("click", (e) => {
     e.preventDefault()
-    let new_json_layers = JSON.parse(on_import_input.value)
-    new_json_layers.forEach(njl => {
-        let nl_id = (helper.count_keys(LAYERS) + 1).toString()
-        // let nl = new Layer(njl.name, nl_id, [500, 500])
-        let nl = new Layer(njl.name, nl_id, 
-            [collection_width, collection_height])
-    
-        nl.add_to_layers()
-        fetch_and_activate_dom_layers()
-    });
-    user_layers_prev_components.push("on_import")
-    user_layers_current_component = ["art_generator_crud_tools", "layers"]
-    switch_user_layers_component()
 
-    helper.appear(right_tools_in_media_query_container, "8")
+    // Check if user entered a valid json or doesn't enter anything
+    if (helper.is_valid_json(on_import_input.value) == false) {
+        console.log("enter valid json man");
+        let msg = "Please Insert a Valid JSON or Use The Format Above"
+        let btns = [{text: "Ok", class:"notification_close n_clear",
+                id:"##" + notification_screen.className}]
+        helper.notification_box(nft_art_generator, notification_screen,
+            {type: "alert !!!", msg, btns}
+        )
+    }else{
+        let new_json_layers = JSON.parse(on_import_input.value)
+        new_json_layers.forEach(njl => {
+            let nl_id = (helper.count_keys(LAYERS) + 1).toString()
+            // let nl = new Layer(njl.name, nl_id, [500, 500])
+            let nl = new Layer(njl.name, nl_id, 
+                [collection_width, collection_height])
+        
+            nl.add_to_layers()
+            fetch_and_activate_dom_layers()
+        });
+        user_layers_prev_components.push("on_import")
+        user_layers_current_component = ["art_generator_crud_tools", "layers"]
+        switch_user_layers_component()
 
-    on_create_container.id = "quick_mode"
-    on_import_input.value = ""
+        helper.appear(right_tools_in_media_query_container, "8")
+
+        on_create_container.id = "quick_mode"
+        on_import_input.value = ""
+    }
 })
 on_import_close.addEventListener("click", () => {
     if (on_create_container.id == "box_mode") {
@@ -769,23 +788,26 @@ create_layer_link.addEventListener("click", () => {
 })
 on_create_button.addEventListener("click", (e) => {
     e.preventDefault()
-    let new_layer_name = on_create_input.value.toString().toLowerCase()
-    let new_layer_id = (helper.count_keys(LAYERS) + 1).toString()
-    // let new_layer = new Layer(new_layer_name, 
-    //     new_layer_id, [500, 500])
-    let new_layer = new Layer(new_layer_name, 
-        new_layer_id, [collection_width, collection_height])
-    new_layer.add_to_layers()
-    fetch_and_activate_dom_layers()
+    if (on_create_input.value == "") {
+        helper.unhide(on_create_error_container, "block")
+    } else {
+        let new_layer_name = on_create_input.value.toString().toLowerCase()
+        let new_layer_id = (helper.count_keys(LAYERS) + 1).toString()
+        let new_layer = new Layer(new_layer_name, 
+            new_layer_id, [collection_width, collection_height])
+        new_layer.add_to_layers()
+        fetch_and_activate_dom_layers()
 
-    user_layers_prev_components.push("on_create")
-    user_layers_current_component = ["art_generator_crud_tools", "layers"]
-    switch_user_layers_component()
+        user_layers_prev_components.push("on_create")
+        user_layers_current_component = ["art_generator_crud_tools", "layers"]
+        switch_user_layers_component()
 
-    helper.appear(right_tools_in_media_query_container, "8")
+        helper.appear(right_tools_in_media_query_container, "8")
 
-    on_create_input.value = ""
-    on_create_container.id = "quick_mode"
+        on_create_input.value = ""
+        helper.hide(on_create_error_container)
+        on_create_container.id = "quick_mode"
+    }
 })
 on_create_close.addEventListener("click", () => {
     if (on_create_container.id == "box_mode") {

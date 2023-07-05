@@ -549,6 +549,15 @@ this.reset_sliders = (default_values, sliders) => {
 
         return invalid_inputs
     }
+
+    this.is_valid_json = (string) => {
+        try {
+            JSON.parse(string)
+        } catch (error) {
+            return false
+        }
+        return true
+    }
 // =====FORM FUNCTIONS ENDS HERE===== //
 }
 // =====CLASS (Help_me) ENDS HERE===== //
