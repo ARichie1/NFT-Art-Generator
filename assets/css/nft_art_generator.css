@@ -897,6 +897,7 @@ ul li:nth-child(2):active:before{
     overflow: hidden;
     display: none;
 }
+
 .app .middle .user_layers
 .layers .layer ul li .image_options li,
 .app .middle .user_single_layer ul li .image_options li{
