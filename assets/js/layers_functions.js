@@ -11,6 +11,8 @@ import { Help_me } from "./functions.js"
 let helper = new Help_me()
 let CHECKED_IMAGES = []
 
+const show_previews_in_media_query_btn = document.querySelector(".show_right_in_media_query_btn")
+
 // LAYER RENAME FUNCTIONALITY STARTS HERE
     // Open Renamer
     let open_rename = (open_btn, open_element, close_elements) => {
@@ -48,6 +50,7 @@ let CHECKED_IMAGES = []
                     layer_object.rename(input_value)
                     if (func_b) func_b(layer_object.name)
                     func_a()
+                    helper.appear(show_previews_in_media_query_btn, "8")
                 })
             }
         }else{
@@ -55,6 +58,7 @@ let CHECKED_IMAGES = []
             setTimeout(() => {
                 if (func_b) func_b(layer_object.name)
                 func_a()
+                helper.appear(show_previews_in_media_query_btn, "8")
             }, 100);
         }
         })
@@ -103,6 +107,7 @@ let delete_a_layer = (delete_btn, layer_object, layers_container,
                         if(helper.count_keys(LAYERS) > 0) func_b()
                     }
                 }, 100);
+                helper.appear(show_previews_in_media_query_btn, "8")
             })
         }
     })
@@ -132,6 +137,7 @@ let add_images = (uploader_files, layer_object, func_a, func_b) => {
     setTimeout(() => {
         if (func_b) func_b(layer_object.name)
         func_a()
+        helper.appear(show_previews_in_media_query_btn, "8")
     }, 100);
 }
 
@@ -164,9 +170,8 @@ let add_image_options = (
             context.imageSmoothingQuality = "high"
             context.drawImage(image, 0, 0, collection_width, collection_height)
             layer_image_info_items[0].innerHTML =  layer_object.name
-            layer_image_info_items[1].innerHTML =  `Id : #${lic_id}`
-            layer_image_info_items[2].innerHTML =  lic_name
-            layer_image_info_items[3].innerHTML =  `${collection_width} x ${collection_height}`
+            layer_image_info_items[1].innerHTML =  lic_name
+            layer_image_info_items[2].innerHTML =  `${collection_width} x ${collection_height}`
 
             let clear_layer_image_preview = () => {
                 context.clearRect(0, 0, 

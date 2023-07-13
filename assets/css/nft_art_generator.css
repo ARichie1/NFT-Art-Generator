@@ -26,7 +26,7 @@
 .app .middle .create_nft_collection
 form{
     width: 70%; height: 70%;
-    margin: 20% auto;
+    margin: 10% auto;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -37,6 +37,22 @@ form h3{
     width: 100%;
     text-align: center;
     margin-bottom: 10%;
+}
+.app .middle .create_nft_collection
+form .manage_cnc_values{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.app .middle .create_nft_collection
+form .manage_cnc_values h5{
+    height: 30px;
+    padding: 2%;
+}
+.app .middle .create_nft_collection
+form .manage_cnc_values h5:nth-child(2){
+    margin-left: 2%;
 }
 .app .middle .create_nft_collection
 form .input_container{
@@ -461,6 +477,11 @@ form button{
 }
 .app .middle .user_layers 
 .on_import form 
+.on_import_form_options .reset_import_form_btn{
+    justify-content: center;
+}
+.app .middle .user_layers 
+.on_import form 
 .on_import_form_options .paste_btn{
     justify-content: flex-end;
 }
@@ -545,6 +566,7 @@ ul li:nth-child(2):active:before{
 .app .middle .user_layers 
 .on_import form button{
     width: 70%; height: 25px;
+    opacity: 0; z-index: -2;
 }
 /* on import styles ends here */
 

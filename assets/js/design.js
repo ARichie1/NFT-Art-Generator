@@ -53,7 +53,6 @@ const middle_components = document.querySelectorAll(".m_c");
 const middle_components_links = document.querySelectorAll(".m_c_l");
 const middle_close_component_links = document.querySelectorAll(".middle .close")
 
-
 // Landing Page Elements Starts Here
 const landing_page = document.querySelector(".landing_page")
 const landing_page_btn = document.querySelector(".landing_page button")
@@ -83,6 +82,8 @@ const nft_art_generator_close = document.querySelector(".nft_art_generator .comp
 
 // Create NFT Collection Component Elements Starts Here
 const create_nft_collection = document.querySelector(".create_nft_collection")
+const reset_form_values_btn = document.querySelector(".reset_cnc_form_values")
+const use_default_values_btn = document.querySelector(".use_default_values")
 const collection_name_input = document.querySelector("#collection_name")
 const collection_size_input = document.querySelector("#collection_size")
 const collection_width_input = document.querySelector("#output_width")
@@ -131,6 +132,7 @@ const on_import_code_box = document.querySelector(".on_import .import_instructio
 const on_import_continue_btn = document.querySelector(".on_import .import_instruction .continue_to_import")
 const on_import_options = document.querySelector(".on_import .on_import_form_options")
 const on_import_view_format_btn = document.querySelector(".on_import .view_import_format")
+const on_import_reset_btn = document.querySelector(".on_import .reset_import_form_btn")
 const on_import_paste_btn = document.querySelector(".on_import .paste_btn")
 const on_import_input  = document.querySelector(".on_import_input")
 const on_import_button  = document.querySelector(".on_import button")
@@ -195,8 +197,7 @@ const notification_screen = document.querySelector(".notification_screen")
 
 
 // =====MEDIA QUERY ELEMENTS STARTS HERE===== //
-const right_tools_in_media_query_container = document.querySelector(".right_tools_in_media_query")
-const right_tools_in_media_query_opener = document.querySelector(".right_tools_in_media_query li")
+const show_right_in_media_query_btn = document.querySelector(".show_right_in_media_query_btn")
 // =====MEDIA QUERY ELEMENTS ENDS HERE===== //
 
 // =====DESIGN LOGIC STARTS HERE===== //
@@ -283,16 +284,13 @@ helper.many_actions("click", [landing_page_btn, nft_art_generator_link], () => {
 theme_and_credits_link.addEventListener("click", () => {
     helper.appear(theme_and_credits_container, "8")
 })
-// theme_change_btn.addEventListener("click", () => {
-//     helper.elements_state_swap("theme_and_credits", "opened")
-// })
 theme_and_credits_close_btn.addEventListener("click", () => {
     helper.disappear(theme_and_credits_container, "-8")
 })
 // Open Theme Setting and Credits Ends Here
 
 // =====Toggle middle to left starts here===== //
-right_tools_in_media_query_opener.onclick = () => {
+show_right_in_media_query_btn.onclick = () => {
     helper.toggle_style_many([
         {name : app_middle,
             props: [["opacity", "0.5", "1"]]},
@@ -302,6 +300,7 @@ right_tools_in_media_query_opener.onclick = () => {
         {name : search_small_screen_overlay,
             props: [["display", "none", "flex"]]},
     ])
+    show_right_in_media_query_btn.style.zIndex = "8"
 }
 // =====Toggle middle to left ends here=====//
 
@@ -309,6 +308,20 @@ right_tools_in_media_query_opener.onclick = () => {
 let collection_name = "no_name", collection_size = 10,
     collection_width = 500, collection_height = 500, collection_format = "png"
 
+// Clear The Inputs
+reset_form_values_btn.addEventListener("click", () => {
+    collection_name_input.value = ""
+    collection_size_input.value = ""
+    collection_width_input.value = ""
+    collection_height_input.value = ""
+})
+// Fill The Inputs With Default Values
+use_default_values_btn.addEventListener("click", () => {
+    collection_name_input.value = "My New Arts"
+    collection_size_input.value = 20
+    collection_width_input.value = 500
+    collection_height_input.value = 500
+})
 // Get Collection Details
 create_nft_collection_button.addEventListener('click', (e) => {
     e.preventDefault()
@@ -415,6 +428,7 @@ let fetch_and_activate_dom_layers = (() => {
                 user_layers_prev_components.push(["art_generator_crud_tools", "layers"])
                 user_layers_current_component = "user_single_layer"
                 switch_user_layers_component()
+                helper.appear(show_right_in_media_query_btn, "8")
             })
         // LAYER SINGLE PAGE OPEl_rename_inputNER FUNCTIONALITY ENDS HERE 
 
@@ -587,7 +601,7 @@ let layers_counter = (() => {
         on_create_container.id = "box_mode"
     }else{
         helper.unhide(searcher_link, "flex")
-        helper.disappear(right_tools_in_media_query_container, "-8")
+        helper.disappear(show_right_in_media_query_btn, "-8")
     }
 });
 
@@ -650,6 +664,7 @@ let fetch_and_activate_dom_single_layer = ((sl_name) => {
     () => {
         fetch_and_activate_dom_layers()
         close_user_layers_component()
+        helper.appear(show_right_in_media_query_btn, "8")
     })
     // CLOSE SINGLE LAYER PAGE FUNCTIONALITY ENDS HERE 
 
@@ -724,11 +739,16 @@ helper.many_actions("click",
     [on_import_copy_btn, on_import_continue_btn], () => {
     helper.disappear(on_import_instruction)
     helper.unhide(on_import_options, "flex")
+    helper.appear(on_import_button, "2")
 })
 
 on_import_view_format_btn.addEventListener("click", () => {
     helper.appear(on_import_instruction)
     helper.hide(on_import_options)
+    helper.disappear(on_import_button, "-2")
+})
+on_import_reset_btn.addEventListener("click", () => {
+    on_import_input.value = ""
 })
 
 // import the layers in the import conponent text area
@@ -759,7 +779,7 @@ on_import_button.addEventListener("click", (e) => {
         user_layers_current_component = ["art_generator_crud_tools", "layers"]
         switch_user_layers_component()
 
-        helper.appear(right_tools_in_media_query_container, "8")
+        helper.appear(show_right_in_media_query_btn, "8")
 
         on_create_container.id = "quick_mode"
         on_import_input.value = ""
@@ -802,7 +822,7 @@ on_create_button.addEventListener("click", (e) => {
         user_layers_current_component = ["art_generator_crud_tools", "layers"]
         switch_user_layers_component()
 
-        helper.appear(right_tools_in_media_query_container, "8")
+        helper.appear(show_right_in_media_query_btn, "8")
 
         on_create_input.value = ""
         helper.hide(on_create_error_container)
@@ -876,7 +896,7 @@ build_test_btn.addEventListener("click", () => {
     test_art_downloader_items[1].innerHTML = `test_art.${collection_format}`
     generator_preview_frames_links[1].click()
     if (WINDOW_WIDTH <= 900) {
-        right_tools_in_media_query_opener.click()
+        show_right_in_media_query_btn.click()
     }
 })
 // Generate a Test Art Ends Here
@@ -919,7 +939,7 @@ on_generate_options[1].addEventListener("click", (e) => {
     // Display The Collection Preview
     generator_preview_frames_links[2].click()
     if (WINDOW_WIDTH <= 900) {
-        right_tools_in_media_query_opener.click()
+        show_right_in_media_query_btn.click()
     }
     
     // Display Image In The Preview Box Onclick
@@ -1008,7 +1028,7 @@ let shutdown_nft_art_generator = () => {
     helper.unhide(nft_art_generator_link, "flex")
     helper.hide_many([nft_art_generator_setting_up, nft_art_generator_power_off_link])
     
-    helper.disappear(right_tools_in_media_query_container, "-8")
+    helper.disappear(show_right_in_media_query_btn, "-8")
     
     helper.elements_state_swap("nft_art_generator", "closed")
     helper.elements_state_swap("landing_page", "opened")
