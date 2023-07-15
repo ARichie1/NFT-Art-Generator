@@ -151,7 +151,11 @@
             <div class="nft_art_generator component m_c" state="closed">
                 <div class="component_opener">
                     <span><i class="fa fa-images"></i></span>
-                    <span class="component_header"><h4>NFT Art Generator</h4></span>
+                    <span class="component_header">
+                        <h4>NFT Art Generator</h4>
+                        <span><i class="fa fa-angle-double-right"></i></span>
+                        <h5 class="collection_name_preview"></h5>
+                    </span>
                     <span class="remove_component close clkb_link" id="##nft_art_generator"><i class="fa fa-power-off"></i></span>
                 </div>
                 <div class="create_nft_collection" state="opened">
@@ -241,6 +245,10 @@
                             <span class="many_icons"><i class="fa fa-images"></i></span>
                                 Generate Art
                         </div>
+                        <div class="disabled_generate_art_link clkb_link">
+                            <span class="many_icons"><i class="fa fa-images"></i></span>
+                                Generate Art
+                        </div>
                     </div>
                     
                     <div class="on_create" id="box_mode" state="closed">
@@ -316,7 +324,7 @@
                             </ul>
                             <ul class="on_generate_options">
                                 <li class="clkb_btn">Test a Combination</li>
-                                <li class="clkb_btn">Generate Collection [ <span class="coll_size">100</span> ]</li>
+                                <li class="clkb_btn">Generate Collection &nbsp; <span class="coll_size"></span></li>
                             </ul>
                         </div>
                     </div>
@@ -326,7 +334,7 @@
                         <li>Test Mode</li>
                         <li>Selected : &nbsp; <span class="selected_test_image_cnt">0</span></em></li>
                     </ul>
-                    <div class="build_test clkb_btn" state="closed"><i class="fa fa-check"></i></div>
+                    <div class="build_test clkb_btn"><i class="fa fa-check"></i></div>
                     
                     <div class="layers scr scr-y" select_mode="relative" state=""closed></div>
                     <div class="user_single_layer" state="closed"></div>

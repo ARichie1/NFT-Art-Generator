@@ -11,8 +11,6 @@ import { Help_me } from "./functions.js"
 let helper = new Help_me()
 let CHECKED_IMAGES = []
 
-const show_previews_in_media_query_btn = document.querySelector(".show_right_in_media_query_btn")
-
 // LAYER RENAME FUNCTIONALITY STARTS HERE
     // Open Renamer
     let open_rename = (open_btn, open_element, close_elements) => {
@@ -50,7 +48,6 @@ const show_previews_in_media_query_btn = document.querySelector(".show_right_in_
                     layer_object.rename(input_value)
                     if (func_b) func_b(layer_object.name)
                     func_a()
-                    helper.appear(show_previews_in_media_query_btn, "8")
                 })
             }
         }else{
@@ -58,7 +55,6 @@ const show_previews_in_media_query_btn = document.querySelector(".show_right_in_
             setTimeout(() => {
                 if (func_b) func_b(layer_object.name)
                 func_a()
-                helper.appear(show_previews_in_media_query_btn, "8")
             }, 100);
         }
         })
@@ -107,13 +103,11 @@ let delete_a_layer = (delete_btn, layer_object, layers_container,
                         if(helper.count_keys(LAYERS) > 0) func_b()
                     }
                 }, 100);
-                helper.appear(show_previews_in_media_query_btn, "8")
             })
         }
     })
 }
 // LAYER DELETE FUNCTIONALITY ENDS HERE
-
 
 // LAYER IMAGES FUNCTIONALITY STARTS HERE
 // Detect and Serve Uploads
@@ -137,12 +131,11 @@ let add_images = (uploader_files, layer_object, func_a, func_b) => {
     setTimeout(() => {
         if (func_b) func_b(layer_object.name)
         func_a()
-        helper.appear(show_previews_in_media_query_btn, "8")
     }, 100);
 }
 
 let add_image_options = (
-    layers_container,
+    layers, layers_container,
     layer_images_containers, layer_object,
     collection_width, collection_height,
     func_a, func_b) => {
@@ -210,15 +203,16 @@ let add_image_options = (
             else CHECKED_IMAGES = helper.remove_element(CHECKED_IMAGES, lic_id)
             console.log(CHECKED_IMAGES);
 
-            document.querySelector(".selected_test_image_cnt").innerHTML = CHECKED_IMAGES.length
-            if (CHECKED_IMAGES.length > 1) {
-                helper.elements_state_swap("build_test", "opened")
-                helper.appear(document.querySelector(".build_test"))
+            document.querySelector(".selected_test_image_cnt").innerHTML 
+                = `${CHECKED_IMAGES.length} / ${helper.count_keys(layers)}`
+             
+            // Only show the build test button when an image 
+            // as been selected in each layer
+            if (CHECKED_IMAGES.length == helper.count_keys(layers)) {
+                helper.appear(document.querySelector(".build_test"), "7")
             }
-            else {
-                helper.elements_state_swap("build_test", "closed")
-                helper.disappear(document.querySelector(".build_test"))
-            }
+            else helper.disappear(document.querySelector(".build_test"), "-7")
+
             // If User Tries To Generate A Test Art
             if (layers_container.getAttribute("select_mode") == "absolute") {
                 layer_images_containers.forEach(a_lic => {
