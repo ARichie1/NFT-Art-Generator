@@ -369,6 +369,7 @@ create_nft_collection_button.addEventListener('click', (e) => {
         helper.hide_many([nft_art_generator_setting_up, nft_art_generator_link])
         
         // app middle tools to show/hide
+        create_nft_collection.setAttribute("state", "closed")
         helper.hide(create_nft_collection)
         user_layers.setAttribute("state", "opened")
         helper.unhide(user_layers, "block")
@@ -1065,7 +1066,9 @@ let shutdown_nft_art_generator = () => {
         fetch_and_activate_dom_layers
         get_layers();
     }, 5000);
-
+    
+    user_layers.setAttribute("state", "closed")
+    create_nft_collection.setAttribute("state", "opened")
     helper.hide_many([test_art_preview_container, 
         collection_preview_container,
         user_layers, nft_art_generator_close])
@@ -1112,6 +1115,9 @@ home_link.addEventListener("click", () => {
     if(user_layers.getAttribute("state") == "closed"){
         helper.elements_state_swap("nft_art_generator", "closed")
         helper.elements_state_swap("landing_page", "opened")
+
+        helper.unhide(nft_art_generator_link, "flex")
+        helper.hide_many([nft_art_generator_setting_up, nft_art_generator_power_off_link])
     }
     else{
         nft_art_generator_power_off_link.click()
