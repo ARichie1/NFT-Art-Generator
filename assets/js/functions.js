@@ -225,11 +225,6 @@ this.remove_special_chars = (str) => {
     let cleaned_str = str.replace(/[^a-zA-Z0-9 ]/g, "")
     return cleaned_str
 }
-// console.log(this.remove_special_chars(`"background"},
-// {"name": "skin"},
-// : "cloth"},
-//  "mouth"}
-// ]));`))
 // =====STRING CLEANER/PUTIFIER ENDS HERE===== //
 
 // SENTENCIZE (CONVERTS AN ARRAY INTO A PROPER SENTENCE) STARTS HERE

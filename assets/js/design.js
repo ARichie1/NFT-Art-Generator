@@ -796,28 +796,45 @@ on_import_reset_btn.addEventListener("click", () => {
 on_import_button.addEventListener("click", (e) => {
     e.preventDefault()
 
-    let new_multi_layers = on_import_input.value.split("\n")
-    let invalid_layer_names = ["", " ", "\t", "\n"]
-    new_multi_layers.forEach(nml => {
-        let cleaned_nml = helper.remove_special_chars(nml)
-        if (!invalid_layer_names.includes(cleaned_nml)) {
-            let nl_id = (helper.count_keys(LAYERS) + 1).toString()
-            let nl = new Layer(cleaned_nml, nl_id, 
-                [collection_width, collection_height])
-        
-            nl.add_to_layers()
-            fetch_and_activate_dom_layers()
-        }
-    });
+    let invalid_layer_names = [
+        "", " ", "\t", "\n", 
+        "~", "`", "!", "@", "#",
+        "$", "%", "^", "&", "*", 
+        "(", ")", "_",  "+", "[",
+        "]", "{", "}", ";", ":", 
+        '"', "'", "\\", "|", "<", 
+        ",", ">", ".", "?", "/",
+    ]
+    if (invalid_layer_names.includes(on_import_input.value)) {
+        let msg = "Please Add ONE or More Layer Names"
+        let btns = [{text: "Ok", class:"notification_close n_clear",
+                id:"##" + notification_screen.className}]
+        helper.notification_box(nft_art_generator, notification_screen,
+            {type: "alert !!!", msg, btns}
+        )
+    }else{
+        let new_multi_layers = on_import_input.value.split("\n")
+        new_multi_layers.forEach(nml => {
+            let cleaned_nml = helper.remove_special_chars(nml)
+            if (!invalid_layer_names.includes(cleaned_nml)) {
+                let nl_id = (helper.count_keys(LAYERS) + 1).toString()
+                let nl = new Layer(cleaned_nml, nl_id, 
+                    [collection_width, collection_height])
+            
+                nl.add_to_layers()
+                fetch_and_activate_dom_layers()
+            }
+        });
 
-    user_layers_prev_components.push("on_import")
-    user_layers_current_component = ["art_generator_crud_tools", "layers"]
-    switch_user_layers_component()
+        user_layers_prev_components.push("on_import")
+        user_layers_current_component = ["art_generator_crud_tools", "layers"]
+        switch_user_layers_component()
 
-    helper.appear(show_right_in_media_query_btn, "8")
+        helper.appear(show_right_in_media_query_btn, "8")
 
-    on_create_container.id = "quick_mode"
-    on_import_input.value = ""
+        on_create_container.id = "quick_mode"
+        on_import_input.value = ""
+    }
 })
 on_import_close.addEventListener("click", () => {
     if (on_create_container.id == "box_mode") {
