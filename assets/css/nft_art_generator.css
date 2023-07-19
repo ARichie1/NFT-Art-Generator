@@ -579,7 +579,7 @@ ul li:nth-child(2):active:before{
 }
 .app .middle .user_layers 
 .on_import form button{
-    width: 70%; height: 25px;
+    width: 70%; height: 30px;
     opacity: 0; z-index: -2;
 }
 /* on import styles ends here */
