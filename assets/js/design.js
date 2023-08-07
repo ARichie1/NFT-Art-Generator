@@ -653,6 +653,12 @@ let layers_counter = (() => {
     }else{
         if (WINDOW_WIDTH <= 900) helper.appear(search_opener_btn, "2")
         else helper.unhide(searcher_link, "flex")
+
+        if (helper.count_keys(LAYERS) > 3) {
+            layers_container.classList.add("scr", "scr-y")
+        }else{
+            layers_container.classList.remove("scr", "scr-y")
+        }
       
         // detect if the user can generate art
         let generate_state;
@@ -668,6 +674,7 @@ let layers_counter = (() => {
                 }
             }
         }
+
         // if layers are more than one and each layers has at least
         // one image then enable the generate button else disable the button
         if (helper.count_keys(LAYERS) > 1 && generate_state) {

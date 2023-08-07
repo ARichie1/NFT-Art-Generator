@@ -749,6 +749,7 @@ ul li:nth-child(2):active:before{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 4%;
     display: none;
 }
 .app .middle .user_layers
