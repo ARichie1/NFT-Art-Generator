@@ -8,7 +8,7 @@ import {open_rename, close_rename, change_layer_name,
     get_checked_images, free_checked_images,
     select_test_images, unselect_test_images,
     build_test_resource, build_collection_resource,
-    build_composite
+    build_composite, free_random_composite_tracker
 } from "./layers_functions.js"
 
 let helper = new Help_me();
@@ -1065,6 +1065,10 @@ on_generate_options[1].addEventListener("click", (e) => {
             }, 4000);
         }
     }
+
+    // empty the random_composite_tracker array so new 
+    // a collection can be generated
+    free_random_composite_tracker()
 
     // Display The Collection Preview
     generator_preview_frames_links[2].click()
