@@ -1013,15 +1013,23 @@ build_test_btn.addEventListener("click", () => {
 // Generate a random collection
 let collection_art_urls = []
 on_generate_options[1].addEventListener("click", (e) => {
+    
+    // activate the loader
+    helper.hide_many([on_generate_options[0], on_generate_options[1]])
+    helper.unhide(on_generate_options[2], "flex")
+
+    // prepare the canvas machine... lol
     collection_image_generator_canvas.width = collection_width
     collection_image_generator_canvas.height = collection_height
     let collection_image_generator_canvas_context = collection_image_generator_canvas.getContext("2d")
 
+    // get the neccessary images resource
     let collection_resource = build_collection_resource(get_layers(), collection_size)
 
-    // Empty Previously Generated Content
+    // empty Previously Generated Content
     generated_arts_container.innerHTML = ""
 
+    // create each art piece
     for (let i = 0; i < collection_size; i++) {
         collection_image_generator_canvas_context.clearRect(0, 0,
             collection_image_generator_canvas.width,
@@ -1031,17 +1039,31 @@ on_generate_options[1].addEventListener("click", (e) => {
             collection_image_generator_canvas.width,
             collection_image_generator_canvas.height)
 
+        // display the art piece
         let new_art_url = collection_image_generator_canvas_context["canvas"].toDataURL("image/png")
         let new_art = document.createElement("img")
         new_art.src = new_art_url
         new_art.id = `coll_${i}`
-
         let new_art_container = document.createElement("li")
         new_art_container.appendChild(new_art)
-
         generated_arts_container.appendChild(new_art_container)
         colletion_images_preview.src = new_art_url
+        
+        // store each art piece source for download reasons
         collection_art_urls.push(new_art_url)
+
+        // deactivate and reset the loader
+        if (i == collection_size - 1) {
+            on_generate_options[2].innerHTML = "Done"
+            setTimeout(() => {
+                on_generate_options[2].innerHTML = `
+                <span class="coll_loader_ui">
+                    <i class="fa fa-spinner"></i>
+                </span>`
+                helper.hide(on_generate_options[2])
+                helper.unhide_many([on_generate_options[0], on_generate_options[1]], "flex")
+            }, 4000);
+        }
     }
 
     // Display The Collection Preview
