@@ -1116,6 +1116,12 @@ on_generate_options[1].addEventListener("click", (e) => {
         colletion_images_preview.src = next_image.src
     })
 
+    // Navigate collection with keyboard also
+    document.addEventListener("keyup", (e) => {
+        if (e.keyCode == 37) show_prev_col_image_btn.click()
+        else if (e.keyCode == 39) show_next_col_image_btn.click()
+    })
+
     // DOWNLOAD GENERATED COLLECTION STARTS HERE
     collection_download_btn.onclick = () => {
         let cnt = 0
