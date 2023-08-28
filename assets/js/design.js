@@ -849,7 +849,7 @@ on_import_loader.addEventListener("change", () => {
         console.log(file_content);
 
         if (invalid_layer_names.includes(file_content)) {
-            let msg = "Please Add ONE or More Layer Names"
+            let msg = "File Is Empty"
             let btns = [{text: "Ok", class:"notification_close n_clear",
                     id:"##" + notification_screen.className}]
             helper.notification_box(nft_art_generator, notification_screen,
